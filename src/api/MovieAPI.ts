@@ -13,6 +13,7 @@ export interface Movie {
   duration: number;
   year: number;
   actor_list: Actor[];
+  synopsis: string;
   age_classification: AgeClassification;
   director: Director;
   distributor: Distributor;
@@ -32,6 +33,7 @@ export interface MovieCreate {
   original_title: string;
   duration: number;
   year: number;
+  synopsis: string;
   age_classification_id: number;
   director_id: number;
   distributor_id: number;
@@ -45,6 +47,7 @@ export interface MovieUpdate {
   original_title?: string;
   duration?: number;
   year?: number;
+  synopsis?: string;
   age_classification_id?: number;
   director_id?: number;
   distributor_id?: number;

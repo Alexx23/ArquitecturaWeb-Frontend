@@ -29,7 +29,14 @@ function TicketsPage() {
       <DataTable
         data={tickets}
         title={"Tickets"}
-        columns={["Usuario", "Película", "Sesión", "Compra", "Fila", "Columna"]}
+        columns={[
+          "Usuario",
+          "Película",
+          "Sesión",
+          "Fecha de Compra",
+          "Fila",
+          "Columna",
+        ]}
         actualPage={actualPage}
         pageSize={pageSize}
         totalSize={totalSize}

@@ -35,6 +35,7 @@ function MovieForm({ movie, onSubmit }: Props) {
             year: movie.year,
             duration: movie.duration,
             web: movie.web,
+            synopsis: movie.synopsis,
             genre_id: movie.genre.id,
             nationality_id: movie.nationality.id,
             distributor_id: movie.distributor.id,
@@ -103,7 +104,7 @@ function MovieForm({ movie, onSubmit }: Props) {
               </p>
             )}
           </div>
-          <div className="col-span-6">
+          <div className="col-span-6 sm:col-span-4">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Título original
             </label>
@@ -125,7 +126,7 @@ function MovieForm({ movie, onSubmit }: Props) {
               </p>
             )}
           </div>
-          <div className="col-span-6 sm:col-span-3">
+          <div className="col-span-6 sm:col-span-1">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Año
             </label>
@@ -147,7 +148,7 @@ function MovieForm({ movie, onSubmit }: Props) {
               </p>
             )}
           </div>
-          <div className="col-span-6 sm:col-span-3">
+          <div className="col-span-6 sm:col-span-1">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
               Duración
             </label>
@@ -300,6 +301,16 @@ function MovieForm({ movie, onSubmit }: Props) {
                 {errors.age_classification_id.message + ""}
               </p>
             )}
+          </div>
+          <div className="col-span-6">
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+              Sinopsis
+            </label>
+            <textarea
+              rows={4}
+              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              {...register("synopsis")}
+            ></textarea>
           </div>
         </div>
       </div>

@@ -74,8 +74,8 @@ function MoviesPage() {
         title={"Películas"}
         columns={[
           "Nombre",
-          "Año",
-          "Duración (minutos)",
+          "Año y duración (minutos)",
+          "Sinopsis",
           "Web",
           "Género",
           "Nacionalidad",

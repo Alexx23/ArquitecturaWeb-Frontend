@@ -8,8 +8,15 @@ interface Props {
 export default function TicketCell({ ticket }: Props) {
   return (
     <>
-      <td className="p-4 text-base font-medium text-gray-900 whitespace-nowrap dark:text-white">
-        {ticket.user.name}
+      <td className="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
+        <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
+          <div className="text-base font-semibold text-gray-900 dark:text-white">
+            {ticket.user.name}
+          </div>
+          <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
+            {ticket.user.username}
+          </div>
+        </div>
       </td>
       <td className="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
         <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
@@ -21,7 +28,7 @@ export default function TicketCell({ ticket }: Props) {
           </div>
         </div>
       </td>
-      <td className="flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
+      <td className="max-w-sm flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
         <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
           <div className="text-base font-semibold text-gray-900 dark:text-white">
             {ticket.session.room.name}
