@@ -6,7 +6,7 @@ export interface RegisterRequest {
   username: string;
   email: string;
   password: string;
-  passwordConfirmation: string;
+  password_confirmation: string;
 }
 
 export interface LoginRequest {

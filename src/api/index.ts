@@ -37,9 +37,10 @@ export const postMethod = <T>(url: string, data?: any): Promise<T> => {
 };
 
 export const putMethod = <T>(url: string, data?: any): Promise<T> => {
+  const query = new URLSearchParams(data).toString();
   return new Promise<T>((resolve, reject) => {
     return axios
-      .put<T>(url, data, axiosConfig)
+      .put<T>(url + "?" + query, null, axiosConfig)
       .then((response: AxiosResponse<T>) => resolve(response.data))
       .catch((error) => {
         reject(catchError(error));

@@ -1,4 +1,5 @@
 import { Paginated, deleteMethod, getMethod, postMethod, putMethod } from ".";
+import { AgeClassification } from "./AgeClassificationAPI";
 import { Director } from "./DirectorAPI";
 import { Distributor } from "./DistributorAPI";
 import { Genre } from "./GenreAPI";
@@ -23,12 +24,6 @@ export interface Movie {
 export interface Actor {
   id: number;
   name: string;
-}
-
-export interface AgeClassification {
-  id: number;
-  name: string;
-  age: number;
 }
 
 export interface MovieCreate {
@@ -57,7 +52,7 @@ export interface MovieUpdate {
   nationality_id?: number;
 }
 
-export default class movieAPI {
+export default class MovieAPI {
   public static async getMovies(
     page: number,
     name?: string | null
@@ -67,6 +62,10 @@ export default class movieAPI {
       url += "&name=" + name;
     }
     return getMethod<Paginated<Movie>>(url);
+  }
+
+  public static async getAllMovies(): Promise<Movie[]> {
+    return getMethod<Movie[]>("/movie/all");
   }
 
   public static async getMovie(id: number): Promise<Paginated<Movie>> {
