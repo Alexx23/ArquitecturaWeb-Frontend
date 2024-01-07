@@ -27,7 +27,7 @@ function RegisterPage() {
       username: data.username,
       email: data.email,
       password: data.password,
-      passwordConfirmation: data.passwordConfirmation,
+      password_confirmation: data.password_confirmation,
     })
       .then((res) => {
         console.log(res);
@@ -165,7 +165,7 @@ function RegisterPage() {
                 placeholder="••••••••"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required
-                {...register("passwordConfirmation", {
+                {...register("password_confirmation", {
                   required: "Confirmación de contraseña necesaria",
                   minLength: {
                     value: 8,
@@ -175,9 +175,9 @@ function RegisterPage() {
                     value === password || "Las contraseñas no coinciden",
                 })}
               />
-              {errors.passwordConfirmation && (
+              {errors.password_confirmation && (
                 <p className="pt-2 text-red-500 text-base italic">
-                  {errors.passwordConfirmation.message + ""}
+                  {errors.password_confirmation.message + ""}
                 </p>
               )}
             </div>
