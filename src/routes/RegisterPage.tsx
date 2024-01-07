@@ -20,7 +20,7 @@ function RegisterPage() {
 
   const password = watch("password", "");
 
-  const submitForm = async (data: RegisterRequest) => {
+  const submitForm = (data: RegisterRequest) => {
     setIsLoading(true);
     AuthAPI.register({
       name: data.name,
@@ -52,7 +52,7 @@ function RegisterPage() {
           <img
             src="/img/logo.png"
             className="mr-4 h-28 rounded-3xl"
-            alt="Logo"
+            alt="Filmy logo"
           />
         </Link>
         <div className="w-full max-w-xl p-6 mb-10 space-y-8 sm:p-8 bg-white rounded-lg shadow dark:bg-gray-800">
@@ -61,15 +61,11 @@ function RegisterPage() {
           </h2>
           <form className="mt-8 space-y-6" action="#">
             <div>
-              <label
-                htmlFor="name"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Nombre y apellidos
               </label>
               <input
                 type="text"
-                id="name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Antonio Pérez"
                 required
@@ -88,15 +84,11 @@ function RegisterPage() {
               )}
             </div>
             <div>
-              <label
-                htmlFor="username"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Nombre de usuario
               </label>
               <input
                 type="text"
-                id="username"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="antonio_perez"
                 required
@@ -115,15 +107,11 @@ function RegisterPage() {
               )}
             </div>
             <div>
-              <label
-                htmlFor="email"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Dirección de correo electrónico
               </label>
               <input
                 type="email"
-                id="email"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="name@company.com"
                 required
@@ -146,15 +134,11 @@ function RegisterPage() {
               )}
             </div>
             <div>
-              <label
-                htmlFor="password"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Contraseña
               </label>
               <input
                 type="password"
-                id="password"
                 placeholder="••••••••"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required
@@ -173,15 +157,11 @@ function RegisterPage() {
               )}
             </div>
             <div>
-              <label
-                htmlFor="confirm-password"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Confirmar contraseña
               </label>
               <input
                 type="password"
-                id="confirm-password"
                 placeholder="••••••••"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required
@@ -204,19 +184,14 @@ function RegisterPage() {
             <div className="flex items-start">
               <div className="flex items-center h-5">
                 <input
-                  id="remember"
                   aria-describedby="remember"
-                  name="remember"
                   type="checkbox"
                   className="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"
                   required
                 />
               </div>
               <div className="ml-3 text-sm">
-                <label
-                  htmlFor="remember"
-                  className="font-medium text-gray-900 dark:text-white"
-                >
+                <label className="font-medium text-gray-900 dark:text-white">
                   Acepto los{" "}
                   <Link
                     to="/terms_and_conditions"

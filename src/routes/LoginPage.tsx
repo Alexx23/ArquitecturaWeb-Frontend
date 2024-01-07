@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../App.css";
 import AuthAPI, { LoginRequest } from "../api/AuthAPI";
 import Loading from "../components/Loading";
@@ -8,8 +8,10 @@ import ApiErrorModal from "../components/modals/ApiErrorModal";
 import SuccessModal from "../components/modals/SuccessModal";
 import { useUser } from "../context/UserContext";
 import { publish } from "../utils/CustomEvents";
+import RoleEnum from "../utils/RoleEnum";
 
 function LoginPage() {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
   const {
@@ -20,7 +22,7 @@ function LoginPage() {
 
   const user = useUser();
 
-  const submitForm = async (data: LoginRequest) => {
+  const submitForm = (data: LoginRequest) => {
     setIsLoading(true);
     AuthAPI.login({
       email: data.email,
@@ -28,7 +30,11 @@ function LoginPage() {
     })
       .then((res) => {
         user.setUser?.(res);
-        publish("showSuccessMessage", "¡Has iniciado sesión correctamente!");
+        if (res.role.id == RoleEnum.ADMIN) {
+          window.location.href = "/admin";
+        } else if (res.role.id == RoleEnum.CLIENT) {
+          navigate("/panel");
+        }
       })
       .catch((err) => {
         publish("showApiErrorMessage", err);
@@ -45,7 +51,7 @@ function LoginPage() {
           <img
             src="/img/logo.png"
             className="mr-4 h-24 rounded-3xl"
-            alt="Logo"
+            alt="Filmy logo"
           />
         </Link>
         <div className="mt-6 w-full max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow dark:bg-gray-800">
@@ -54,15 +60,11 @@ function LoginPage() {
           </h2>
           <form className="mt-8 space-y-6" action="#">
             <div>
-              <label
-                htmlFor="email"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Dirección de correo electrónico o nombre de usuario
               </label>
               <input
                 type="email"
-                id="email"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="name@company.com"
                 required
@@ -81,15 +83,11 @@ function LoginPage() {
               )}
             </div>
             <div>
-              <label
-                htmlFor="password"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
+              <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Contraseña
               </label>
               <input
                 type="password"
-                id="password"
                 placeholder="••••••••"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required
