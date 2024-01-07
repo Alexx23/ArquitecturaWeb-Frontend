@@ -33,7 +33,7 @@ function DeleteModal({ show, onClose, onDelete }: Props) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="items-center justify-center w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="items-center justify-center w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all dark:bg-gray-800">
                 <div className="text-lg leading-6 text-center">
                   <svg
                     className="w-20 h-20 mx-auto text-red-600"
@@ -51,7 +51,7 @@ function DeleteModal({ show, onClose, onDelete }: Props) {
                   </svg>
                 </div>
                 <div className="mt-2">
-                  <p className="cursor-pointer text-lg text-gray-600 text-center mb-10">
+                  <p className="text-lg text-gray-600 text-center mb-10 dark:text-gray-400">
                     ¿Estás seguro de que deseas eliminar?
                   </p>
                 </div>

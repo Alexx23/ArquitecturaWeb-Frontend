@@ -1,5 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import { FieldValues, useForm, UseFormRegister } from "react-hook-form";
 
 interface Props<T> {
   show: boolean;
@@ -7,7 +8,6 @@ interface Props<T> {
   element: T | false | null;
   renderForm: (element: T | false | null) => React.ReactNode;
   onClose: () => void;
-  onSubmit: () => void;
 }
 function UpdateModal<T>({
   show,
@@ -15,7 +15,6 @@ function UpdateModal<T>({
   element,
   renderForm,
   onClose,
-  onSubmit,
 }: Props<T>) {
   return (
     <Transition appear show={show} as={Fragment}>
@@ -43,7 +42,7 @@ function UpdateModal<T>({
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="items-center justify-center w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="items-center justify-center w-full max-w-2xl transform overflow-hidden rounded-2xl bg-white text-left align-middle shadow-xl transition-all dark:bg-gray-800">
                 <div className="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
                   <h3 className="text-xl font-semibold dark:text-white">
                     {(element ? "Editar " : "Añadir ") + title}
@@ -67,16 +66,8 @@ function UpdateModal<T>({
                     </svg>
                   </button>
                 </div>
-                <div className="p-6 space-y-6">{renderForm(element)}</div>
-                <div className="items-center p-6 border-t border-gray-200 rounded-b dark:border-gray-700">
-                  <button
-                    onClick={onSubmit}
-                    className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                    type="submit"
-                  >
-                    {(element ? "Guardar " : "Crear ") + title}
-                  </button>
-                </div>
+
+                {renderForm(element)}
               </Dialog.Panel>
             </Transition.Child>
           </div>
