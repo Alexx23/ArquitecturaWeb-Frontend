@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
+import AdminPage from "./routes/AdminPage";
 import HomePage from "./routes/HomePage";
 import LoginPage from "./routes/LoginPage";
 import RegisterPage from "./routes/RegisterPage";
-import AdminDashboardPage from "./routes/admin/AdminDashboardPage";
 import Error404 from "./routes/errors/Error404";
 import ErrorBoundary from "./routes/errors/ErrorBoundary";
 import RequireAuth from "./utils/RequireAuth";
@@ -17,12 +17,15 @@ function App() {
         <Route path="register" element={<RegisterPage />} />
       </Route>
       <Route
-        path="/admin"
-        element={<RequireAuth allowedRoles={[RoleEnum.ADMIN]} />}
+        path="/admin/*"
+        element={
+          <>
+            <RequireAuth allowedRoles={[RoleEnum.ADMIN]} />
+            <AdminPage />
+          </>
+        }
         errorElement={<ErrorBoundary />}
-      >
-        <Route index element={<AdminDashboardPage />} />
-      </Route>
+      />
       <Route path="*" element={<Error404 />} />
     </Routes>
   );

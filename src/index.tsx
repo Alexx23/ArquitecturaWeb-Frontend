@@ -2,12 +2,14 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons/faAngleLeft";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons/faCircleCheck";
 import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons/faXmarkCircle";
+import "flowbite/dist/flowbite.js";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App";
 import UserProvider from "./context/UserContext";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+import "./utils/DarkMode";
 
 library.add(faAngleLeft, faCircleCheck, faXmarkCircle);
 
