@@ -5,6 +5,7 @@ import AdminNavbar from "../components/admin/Navbar";
 import AdminSidebar from "../components/admin/Sidebar";
 import ApiErrorModal from "../components/modals/ApiErrorModal";
 import SuccessModal from "../components/modals/SuccessModal";
+import ActorsPage from "./admin/ActorPage";
 import DirectorsPage from "./admin/DirectorsPage";
 import DistributorsPage from "./admin/DistributorsPage";
 import GenresPage from "./admin/GenresPage";
@@ -32,6 +33,7 @@ function AdminPage() {
             <Routes>
               <Route path="/movies" element={<MoviesPage />} />
               <Route path="/genres" element={<GenresPage />} />
+              <Route path="/actors" element={<ActorsPage />} />
               <Route path="/directors" element={<DirectorsPage />} />
               <Route path="/distributors" element={<DistributorsPage />} />
               <Route path="/nationalities" element={<NationalitiesPage />} />

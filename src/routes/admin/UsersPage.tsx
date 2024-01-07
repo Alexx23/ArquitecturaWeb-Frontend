@@ -28,7 +28,7 @@ function UsersPage() {
     <>
       <DataTable
         data={users}
-        title={"Users"}
+        title={"Usuarios"}
         columns={["Nombre", "Email", "Tickets", "Fecha de Creación"]}
         actualPage={actualPage}
         pageSize={pageSize}

@@ -27,7 +27,7 @@ function useTickets(inputName: string) {
       .catch((err) => {
         publish(
           "showApiErrorMessage",
-          "No se ha podido cargar la lista de películas correctamente. Por favor, inténtalo de nuevo en unos minutos."
+          "No se ha podido cargar la lista de tickets correctamente. Por favor, inténtalo de nuevo en unos minutos."
         );
       })
       .finally(() => {

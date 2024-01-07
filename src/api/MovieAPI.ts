@@ -1,4 +1,5 @@
 import { Paginated, deleteMethod, getMethod, postMethod, putMethod } from ".";
+import { Actor } from "./ActorAPI";
 import { AgeClassification } from "./AgeClassificationAPI";
 import { Director } from "./DirectorAPI";
 import { Distributor } from "./DistributorAPI";
@@ -20,11 +21,6 @@ export interface Movie {
   genre: Genre;
   nationality: Nationality;
   comment_list: Comment[];
-}
-
-export interface Actor {
-  id: number;
-  name: string;
 }
 
 export interface MovieCreate {

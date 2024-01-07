@@ -27,7 +27,7 @@ function useUsers(inputName: string) {
       .catch((err) => {
         publish(
           "showApiErrorMessage",
-          "No se ha podido cargar la lista de películas correctamente. Por favor, inténtalo de nuevo en unos minutos."
+          "No se ha podido cargar la lista de usuarios correctamente. Por favor, inténtalo de nuevo en unos minutos."
         );
       })
       .finally(() => {

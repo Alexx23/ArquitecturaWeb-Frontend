@@ -85,6 +85,7 @@ const AdminSidebar = ({ sidebarMobileShow }: Props) => {
                       (isPathActive([
                         "movies",
                         "genres",
+                        "actors",
                         "directors",
                         "distributors",
                         "nationalities",
@@ -117,6 +118,19 @@ const AdminSidebar = ({ sidebarMobileShow }: Props) => {
                         }
                       >
                         Géneros
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/admin/actors"
+                        className={
+                          "text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700" +
+                          (isPathActive(["actors"])
+                            ? " bg-gray-100 dark:bg-gray-700"
+                            : "")
+                        }
+                      >
+                        Actores
                       </Link>
                     </li>
                     <li>

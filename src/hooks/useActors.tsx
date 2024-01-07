@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import RoomAPI, { Room } from "../api/RoomAPI";
+import ActorAPI, { Actor } from "../api/ActorAPI";
 import { publish } from "../utils/CustomEvents";
 
-function useRooms(inputName: string) {
-  const [rooms, setRooms] = useState<Room[]>([]);
+function useActors(inputName: string) {
+  const [actors, setActors] = useState<Actor[]>([]);
   const [actualPage, setActualPage] = useState(0);
   const [nextPage, setNextPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -11,14 +11,14 @@ function useRooms(inputName: string) {
   const [totalSize, setTotalSize] = useState(0);
   const [inputChanged, setInputChanged] = useState(false);
 
-  const requestRooms = (pageToRequest: number) => {
+  const requestActors = (pageToRequest: number) => {
     if (isLoading && pageToRequest != 1) return;
     if (pageToRequest <= 0) return;
     setIsLoading(true);
 
-    RoomAPI.getRooms(pageToRequest, inputName.length ? inputName : null)
+    ActorAPI.getActors(pageToRequest, inputName.length ? inputName : null)
       .then((res) => {
-        setRooms(res.data);
+        setActors(res.data);
         setActualPage(res.actual_page);
         setNextPage(res.has_more ? res.actual_page + 1 : -1);
         setPageSize(res.page_size);
@@ -27,7 +27,7 @@ function useRooms(inputName: string) {
       .catch((err) => {
         publish(
           "showApiErrorMessage",
-          "No se ha podido cargar la lista de salas correctamente. Por favor, inténtalo de nuevo en unos minutos."
+          "No se ha podido cargar la lista de actores correctamente. Por favor, inténtalo de nuevo en unos minutos."
         );
       })
       .finally(() => {
@@ -35,11 +35,11 @@ function useRooms(inputName: string) {
       });
   };
 
-  const requestAllRooms = () => {
+  const requestAllActors = () => {
     setIsLoading(true);
-    RoomAPI.getAllRooms()
+    ActorAPI.getAllActors()
       .then((res) => {
-        setRooms(
+        setActors(
           res.sort((a, b) => {
             if (a.name > b.name) return 1;
             return -1;
@@ -53,7 +53,7 @@ function useRooms(inputName: string) {
       .catch((err) => {
         publish(
           "showApiErrorMessage",
-          "No se ha podido cargar la lista de salas correctamente. Por favor, inténtalo de nuevo en unos minutos."
+          "No se ha podido cargar la lista de actores correctamente. Por favor, inténtalo de nuevo en unos minutos."
         );
       })
       .finally(() => {
@@ -65,24 +65,24 @@ function useRooms(inputName: string) {
     if (!inputChanged) return;
     setIsLoading(true);
     const timer = setTimeout(() => {
-      requestRooms(1);
+      requestActors(1);
     }, 800);
     return () => clearTimeout(timer);
   }, [inputChanged, inputName]);
 
   return {
-    rooms,
+    actors,
     isLoading,
     actualPage,
     nextPage,
     pageSize,
     totalSize,
     setInputChanged,
-    fetchNext: () => requestRooms(nextPage),
-    fetchCurrent: () => requestRooms(actualPage),
-    fetchPrevious: () => requestRooms(actualPage - 1),
-    fetchAll: () => requestAllRooms(),
+    fetchNext: () => requestActors(nextPage),
+    fetchCurrent: () => requestActors(actualPage),
+    fetchPrevious: () => requestActors(actualPage - 1),
+    fetchAll: () => requestAllActors(),
   };
 }
 
-export default useRooms;
+export default useActors;
