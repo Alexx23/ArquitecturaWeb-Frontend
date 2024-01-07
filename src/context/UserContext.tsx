@@ -6,25 +6,29 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useNavigate } from "react-router-dom";
 import AuthAPI from "../api/AuthAPI";
 import { User } from "../api/UserAPI";
 
-export interface UserSession {
+export interface UserContextInterface {
   user: User | null;
   setUser?: (user: User | null) => void;
+  logout?: () => void;
 }
 
-const UserContext = createContext<UserSession>({
+const UserContext = createContext<UserContextInterface>({
   user: null,
 });
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
 
   const logout = () => {
     AuthAPI.logout().finally(() => {
       setUser(null);
       localStorage.clear();
+      window.location.href = "/login";
     });
   };
 
@@ -46,6 +50,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const value = {
     user,
     setUser,
+    logout,
   };
 
   return createElement(UserContext.Provider, { value }, children);
