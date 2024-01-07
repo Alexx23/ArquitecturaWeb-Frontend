@@ -34,7 +34,7 @@ const ApiErrorModal = ({ goTo }: Props) => {
   }, []);
   return (
     <Transition appear show={isOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Dialog as="div" className="relative z-40" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -67,9 +67,7 @@ const ApiErrorModal = ({ goTo }: Props) => {
                   />
                 </div>
                 <div className="mt-2">
-                  <p className="text-base text-gray-700 text-center">
-                    {message}
-                  </p>
+                  <p className="text-lg text-gray-600 text-center">{message}</p>
                 </div>
 
                 <div className="items-center mt-4 text-center">
