@@ -9,6 +9,7 @@ function useMovies(inputName: string) {
   const [isLoading, setIsLoading] = useState(false);
   const [pageSize, setPageSize] = useState(0);
   const [totalSize, setTotalSize] = useState(0);
+  const [inputChanged, setInputChanged] = useState(false);
 
   const requestMovies = (pageToRequest: number) => {
     if (isLoading && pageToRequest != 1) return;
@@ -34,13 +35,40 @@ function useMovies(inputName: string) {
       });
   };
 
+  const requestAllMovies = () => {
+    setIsLoading(true);
+    MovieAPI.getAllMovies()
+      .then((res) => {
+        setMovies(
+          res.sort((a, b) => {
+            if (a.name > b.name) return 1;
+            return -1;
+          })
+        );
+        setActualPage(-1);
+        setNextPage(-1);
+        setPageSize(-1);
+        setTotalSize(-1);
+      })
+      .catch((err) => {
+        publish(
+          "showApiErrorMessage",
+          "No se ha podido cargar la lista de películas correctamente. Por favor, inténtalo de nuevo en unos minutos."
+        );
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   useEffect(() => {
+    if (!inputChanged) return;
     setIsLoading(true);
     const timer = setTimeout(() => {
       requestMovies(1);
     }, 800);
     return () => clearTimeout(timer);
-  }, [inputName]);
+  }, [inputChanged, inputName]);
 
   return {
     movies,
@@ -49,9 +77,11 @@ function useMovies(inputName: string) {
     nextPage,
     pageSize,
     totalSize,
+    setInputChanged,
     fetchNext: () => requestMovies(nextPage),
     fetchCurrent: () => requestMovies(actualPage),
     fetchPrevious: () => requestMovies(actualPage - 1),
+    fetchAll: () => requestAllMovies(),
   };
 }
 

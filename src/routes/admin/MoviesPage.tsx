@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import MovieAPI, { Movie } from "../../api/MovieAPI";
+import MovieAPI, { Movie, MovieCreate } from "../../api/MovieAPI";
 import DataTable from "../../components/admin/DataTable";
 import DeleteModal from "../../components/admin/DeleteModal";
-import MovieCell from "../../components/admin/MovieCell";
-import MovieForm from "../../components/admin/MovieForm";
+import MovieCell from "../../components/admin/movies/MovieCell";
+import MovieForm from "../../components/admin/movies/MovieForm";
 import UpdateModal from "../../components/admin/UpdateModal";
 import useMovies from "../../hooks/useMovies";
 import { publish } from "../../utils/CustomEvents";
@@ -19,6 +19,7 @@ function MoviesPage() {
     pageSize,
     totalSize,
     isLoading,
+    setInputChanged,
     fetchNext,
     fetchCurrent,
     fetchPrevious,
@@ -33,11 +34,31 @@ function MoviesPage() {
         );
         fetchCurrent();
       })
-      .catch(() => {
-        publish("showApiErrorMessage", "No se ha podido eliminar la película");
+      .catch((message) => {
+        publish("showApiErrorMessage", message);
       })
       .finally(() => {
         setDeleteId(null);
+      });
+  };
+
+  const handleUpdate = (movie: MovieCreate) => {
+    let promise: Promise<Movie>;
+    if (updateMovie) {
+      promise = MovieAPI.updateMovie(updateMovie.id, movie);
+    } else {
+      promise = MovieAPI.createMovie(movie);
+    }
+    promise
+      .then((res) => {
+        publish("showSuccessMessage", "Operación realizada correctamente");
+        fetchCurrent();
+      })
+      .catch((message) => {
+        publish("showApiErrorMessage", message);
+      })
+      .finally(() => {
+        setUpdateMovie(null);
       });
   };
 
@@ -61,17 +82,19 @@ function MoviesPage() {
           "Distribuidor",
           "Director",
           "Clasificación",
-          "Acciones",
         ]}
         actualPage={actualPage}
         pageSize={pageSize}
         totalSize={totalSize}
         nextPage={nextPage}
         isLoading={isLoading}
+        canEdit={true}
+        canSearch={true}
         renderCell={(movie: Movie) => <MovieCell movie={movie} />}
         onNextPage={fetchNext}
         onPreviousPage={fetchPrevious}
         onSearch={(search: string) => {
+          setInputChanged(true);
           setInputName(search);
         }}
         onDelete={setDeleteId}
@@ -89,9 +112,8 @@ function MoviesPage() {
         element={updateMovie}
         onClose={() => setUpdateMovie(null)}
         renderForm={(movie: Movie | false | null) => (
-          <MovieForm movie={movie} />
+          <MovieForm movie={movie} onSubmit={handleUpdate} />
         )}
-        onSubmit={() => {}}
       />
     </>
   );
