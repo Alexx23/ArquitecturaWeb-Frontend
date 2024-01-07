@@ -58,6 +58,14 @@ export const deleteMethod = <T>(url: string): Promise<T> => {
   });
 };
 
+export interface Paginated<T> {
+  data: T[];
+  actual_page: number;
+  page_size: number;
+  total_size: number;
+  has_more: boolean;
+}
+
 const catchError = (error: AxiosError): any => {
   if (error.code != null && error.code === "ECONNABORTED") {
     return "No se ha podido conectar con el servidor.";

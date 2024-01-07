@@ -9,21 +9,9 @@ export interface RegisterRequest {
   passwordConfirmation: string;
 }
 
-export interface RegisterResponse {
-  message: string;
-}
-
 export interface LoginRequest {
   email: string;
   password: string;
-}
-
-export interface LoginResponse {
-  message: string;
-}
-
-export interface LogoutResponse {
-  message: string;
 }
 
 export default class AuthAPI {
@@ -33,11 +21,11 @@ export default class AuthAPI {
 
   public static async register(
     registerRequest: RegisterRequest
-  ): Promise<RegisterResponse> {
-    return postMethod<RegisterResponse>("/register", registerRequest);
+  ): Promise<unknown> {
+    return postMethod<unknown>("/register", registerRequest);
   }
 
-  public static async logout(): Promise<LogoutResponse> {
-    return getMethod<LogoutResponse>("/logout");
+  public static async logout(): Promise<unknown> {
+    return getMethod<unknown>("/logout");
   }
 }
