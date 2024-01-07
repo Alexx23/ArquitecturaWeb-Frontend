@@ -2,6 +2,10 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons/faAngleLeft";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons/faCircleCheck";
 import { faXmarkCircle } from "@fortawesome/free-solid-svg-icons/faXmarkCircle";
+import { faHouse } from "@fortawesome/free-solid-svg-icons/faHouse";
+import { faCalendarWeek } from "@fortawesome/free-solid-svg-icons/faCalendarWeek";
+import { faTicket } from "@fortawesome/free-solid-svg-icons/faTicket";
+import { faUsers } from "@fortawesome/free-solid-svg-icons/faUsers";
 import "flowbite/dist/flowbite.js";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -11,7 +15,15 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import "./utils/DarkMode";
 
-library.add(faAngleLeft, faCircleCheck, faXmarkCircle);
+library.add(
+  faAngleLeft,
+  faCircleCheck,
+  faXmarkCircle,
+  faHouse,
+  faCalendarWeek,
+  faTicket,
+  faUsers
+);
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
