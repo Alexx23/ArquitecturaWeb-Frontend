@@ -31,8 +31,8 @@ export default class ActorAPI {
     return getMethod<Actor[]>("/actor/all");
   }
 
-  public static async getActor(id: number): Promise<Paginated<Actor>> {
-    return getMethod<Paginated<Actor>>("/actor/" + id);
+  public static async getActor(id: number): Promise<Actor> {
+    return getMethod<Actor>("/actor/" + id);
   }
 
   public static async createActor(actor: ActorCreate): Promise<Actor> {

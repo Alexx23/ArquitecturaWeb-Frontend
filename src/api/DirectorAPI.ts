@@ -29,8 +29,8 @@ export default class DirectorAPI {
     return getMethod<Director[]>("/director/all");
   }
 
-  public static async getDirector(id: number): Promise<Paginated<Director>> {
-    return getMethod<Paginated<Director>>("/director/" + id);
+  public static async getDirector(id: number): Promise<Director> {
+    return getMethod<Director>("/director/" + id);
   }
 
   public static async createDirector(

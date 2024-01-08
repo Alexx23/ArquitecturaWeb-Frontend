@@ -20,7 +20,6 @@ export interface Movie {
   distributor: Distributor;
   genre: Genre;
   nationality: Nationality;
-  comment_list: Comment[];
 }
 
 export interface MovieCreate {
@@ -67,8 +66,8 @@ export default class MovieAPI {
     return getMethod<Movie[]>("/movie/all");
   }
 
-  public static async getMovie(id: number): Promise<Paginated<Movie>> {
-    return getMethod<Paginated<Movie>>("/movie/" + id);
+  public static async getMovie(id: number): Promise<Movie> {
+    return getMethod<Movie>("/movie/" + id);
   }
 
   public static async createMovie(movie: MovieCreate): Promise<Movie> {

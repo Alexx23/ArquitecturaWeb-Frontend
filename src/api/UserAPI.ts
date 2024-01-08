@@ -2,6 +2,7 @@ import { getMethod, Paginated } from ".";
 import { Ticket } from "./TicketAPI";
 
 export interface User {
+  id: number;
   name: string;
   username: string;
   email: string;
@@ -21,6 +22,7 @@ export interface Card {
   id: number;
   expiration: Date;
   user: User[];
+  created_at: Date;
 }
 
 export default class UserAPI {
@@ -33,9 +35,5 @@ export default class UserAPI {
       url += "&name=" + name;
     }
     return getMethod<Paginated<User>>(url);
-  }
-
-  public static async getUser(id: number): Promise<Paginated<User>> {
-    return getMethod<Paginated<User>>("/user/" + id);
   }
 }

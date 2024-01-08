@@ -35,8 +35,8 @@ export default class TicketAPI {
     return getMethod<Paginated<Ticket>>(url);
   }
 
-  public static async getTicket(id: number): Promise<Paginated<Ticket>> {
-    return getMethod<Paginated<Ticket>>("/ticket/" + id);
+  public static async getTicket(id: number): Promise<Ticket> {
+    return getMethod<Ticket>("/ticket/" + id);
   }
 
   public static async createTicket(ticket: TicketCreate): Promise<Ticket> {

@@ -35,8 +35,8 @@ export default class RoomAPI {
     return getMethod<Room[]>("/room/all");
   }
 
-  public static async getRoom(id: number): Promise<Paginated<Room>> {
-    return getMethod<Paginated<Room>>("/room/" + id);
+  public static async getRoom(id: number): Promise<Room> {
+    return getMethod<Room>("/room/" + id);
   }
 
   public static async createRoom(room: RoomCreate): Promise<Room> {

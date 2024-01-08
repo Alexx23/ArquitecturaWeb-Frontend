@@ -29,10 +29,8 @@ export default class DistributorAPI {
     return getMethod<Distributor[]>("/distributor/all");
   }
 
-  public static async getDistributor(
-    id: number
-  ): Promise<Paginated<Distributor>> {
-    return getMethod<Paginated<Distributor>>("/distributor/" + id);
+  public static async getDistributor(id: number): Promise<Distributor> {
+    return getMethod<Distributor>("/distributor/" + id);
   }
 
   public static async createDistributor(

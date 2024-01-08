@@ -29,10 +29,8 @@ export default class NationalityAPI {
     return getMethod<Nationality[]>("/nationality/all");
   }
 
-  public static async getNationality(
-    id: number
-  ): Promise<Paginated<Nationality>> {
-    return getMethod<Paginated<Nationality>>("/nationality/" + id);
+  public static async getNationality(id: number): Promise<Nationality> {
+    return getMethod<Nationality>("/nationality/" + id);
   }
 
   public static async createNationality(

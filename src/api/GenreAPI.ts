@@ -29,8 +29,8 @@ export default class GenreAPI {
     return getMethod<Genre[]>("/genre/all");
   }
 
-  public static async getGenre(id: number): Promise<Paginated<Genre>> {
-    return getMethod<Paginated<Genre>>("/genre/" + id);
+  public static async getGenre(id: number): Promise<Genre> {
+    return getMethod<Genre>("/genre/" + id);
   }
 
   public static async createGenre(genre: GenreCreate): Promise<Genre> {
