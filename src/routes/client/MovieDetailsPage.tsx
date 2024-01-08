@@ -179,7 +179,7 @@ const MovieDetailsPage = () => {
                 >
                   Inicia sesión
                 </Link>{" "}
-                para poder ver los comentarios y comentar.
+                para poder ver los comentarios y subir tus propios comentarios.
               </p>
             </Container>
           )}
