@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import MovieAPI, { Movie, MovieCreate } from "../../api/MovieAPI";
 import DataTable from "../../components/admin/DataTable";
 import DeleteModal from "../../components/admin/DeleteModal";
+import MovieActorForm from "../../components/admin/movies/MovieActorsForm";
 import MovieCell from "../../components/admin/movies/MovieCell";
 import MovieForm from "../../components/admin/movies/MovieForm";
 import UpdateModal from "../../components/admin/UpdateModal";
@@ -12,6 +13,9 @@ function MoviesPage() {
   const [inputName, setInputName] = useState("");
   const [deleteId, setDeleteId] = useState<number | null>(null);
   const [updateMovie, setUpdateMovie] = useState<Movie | false | null>(null);
+  const [updateMovieActors, setUpdateMovieActors] = useState<Movie | null>(
+    null
+  );
   const {
     movies,
     nextPage,
@@ -62,6 +66,20 @@ function MoviesPage() {
       });
   };
 
+  const handleUpdateActorIds = (actorIds: number[]) => {
+    MovieAPI.setActors(updateMovieActors!.id, actorIds)
+      .then((res) => {
+        publish("showSuccessMessage", "Operación realizada correctamente");
+        fetchCurrent();
+      })
+      .catch((message) => {
+        publish("showApiErrorMessage", message);
+      })
+      .finally(() => {
+        setUpdateMovieActors(null);
+      });
+  };
+
   useEffect(() => {
     fetchNext();
   }, []);
@@ -100,6 +118,8 @@ function MoviesPage() {
         onDelete={setDeleteId}
         onCreate={() => setUpdateMovie(false)}
         onUpdate={setUpdateMovie}
+        customUpdate={"Actores"}
+        onCustomUpdate={setUpdateMovieActors}
       />
       <DeleteModal
         show={deleteId != null}
@@ -113,6 +133,15 @@ function MoviesPage() {
         onClose={() => setUpdateMovie(null)}
         renderForm={(movie: Movie | false | null) => (
           <MovieForm movie={movie} onSubmit={handleUpdate} />
+        )}
+      />
+      <UpdateModal
+        show={updateMovieActors != null}
+        title="Actores"
+        element={updateMovieActors}
+        onClose={() => setUpdateMovieActors(null)}
+        renderForm={(movie: Movie | false | null) => (
+          <MovieActorForm movie={movie} onSubmit={handleUpdateActorIds} />
         )}
       />
     </>

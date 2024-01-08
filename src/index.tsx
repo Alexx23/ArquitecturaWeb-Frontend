@@ -6,6 +6,7 @@ import { faHouse } from "@fortawesome/free-solid-svg-icons/faHouse";
 import { faCalendarWeek } from "@fortawesome/free-solid-svg-icons/faCalendarWeek";
 import { faTicket } from "@fortawesome/free-solid-svg-icons/faTicket";
 import { faUsers } from "@fortawesome/free-solid-svg-icons/faUsers";
+import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import "flowbite/dist/flowbite.js";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -22,7 +23,8 @@ library.add(
   faHouse,
   faCalendarWeek,
   faTicket,
-  faUsers
+  faUsers,
+  faPlus
 );
 
 const root = ReactDOM.createRoot(

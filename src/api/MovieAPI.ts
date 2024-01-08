@@ -85,4 +85,11 @@ export default class MovieAPI {
   public static async deleteMovie(id: number): Promise<unknown> {
     return deleteMethod<unknown>("/movie/" + id);
   }
+
+  public static async setActors(
+    id: number,
+    actorListIds: any
+  ): Promise<unknown> {
+    return postMethod<unknown>("/movie/" + id + "/actor", actorListIds);
+  }
 }
