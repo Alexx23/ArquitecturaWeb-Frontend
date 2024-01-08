@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import MovieAPI, { Movie } from "../api/MovieAPI";
 import { publish } from "../utils/CustomEvents";
 
-function useMovies(inputName: string) {
+function useMovies(inputName: string, accumulable: boolean = false) {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [actualPage, setActualPage] = useState(0);
   const [nextPage, setNextPage] = useState(1);
@@ -18,7 +18,11 @@ function useMovies(inputName: string) {
 
     MovieAPI.getMovies(pageToRequest, inputName.length ? inputName : null)
       .then((res) => {
-        setMovies(res.data);
+        if (accumulable) {
+          setMovies((prevMovies) => [...prevMovies, ...res.data]);
+        } else {
+          setMovies(res.data);
+        }
         setActualPage(res.actual_page);
         setNextPage(res.has_more ? res.actual_page + 1 : -1);
         setPageSize(res.page_size);

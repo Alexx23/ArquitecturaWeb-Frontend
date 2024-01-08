@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import AdminFooter from "../components/admin/Footer";
-import AdminNavbar from "../components/admin/Navbar";
+import AdminNavbar from "../components/admin/AdminNavbar";
 import AdminSidebar from "../components/admin/Sidebar";
 import ApiErrorModal from "../components/modals/ApiErrorModal";
 import SuccessModal from "../components/modals/SuccessModal";
