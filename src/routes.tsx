@@ -7,14 +7,16 @@ import Error404 from "./routes/errors/Error404";
 import ErrorBoundary from "./routes/errors/ErrorBoundary";
 import RequireAuth from "./utils/RequireAuth";
 import RoleEnum from "./utils/RoleEnum";
+import ClientMoviesPage from "./routes/ClientMoviesPage";
 
 function App() {
   return (
     <Routes>
       <Route path="/" errorElement={<ErrorBoundary />}>
         <Route index element={<HomePage />} />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/movies/*" element={<ClientMoviesPage />} />
       </Route>
       <Route
         path="/admin/*"

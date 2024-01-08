@@ -8,14 +8,20 @@ import { faTicket } from "@fortawesome/free-solid-svg-icons/faTicket";
 import { faUsers } from "@fortawesome/free-solid-svg-icons/faUsers";
 import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons/faPenToSquare";
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons/faPaperPlane";
 import "flowbite/dist/flowbite.js";
+import "aos/dist/aos.css";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import App from "./App";
+import CustomRoutes from "./routes";
 import UserProvider from "./context/UserContext";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import "./utils/DarkMode";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 library.add(
   faAngleLeft,
@@ -26,7 +32,9 @@ library.add(
   faTicket,
   faUsers,
   faPlus,
-  faPenToSquare
+  faPenToSquare,
+  faCartShopping,
+  faPaperPlane
 );
 
 const root = ReactDOM.createRoot(
@@ -38,7 +46,7 @@ root.render(
     <UserProvider>
       <main className="bg-gray-50 dark:bg-gray-900">
         <Routes>
-          <Route path="/*" element={<App />} />
+          <Route path="/*" element={<CustomRoutes />} />
         </Routes>
       </main>
     </UserProvider>
