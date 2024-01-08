@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import "../App.css";
 import AuthAPI, { RegisterRequest } from "../api/AuthAPI";
 import Loading from "../components/Loading";
 import ApiErrorModal from "../components/modals/ApiErrorModal";
@@ -51,13 +50,13 @@ function RegisterPage() {
         >
           <img
             src="/img/logo.png"
-            className="mr-4 h-28 rounded-3xl"
+            className="h-28 rounded-3xl"
             alt="Filmy logo"
           />
         </Link>
         <div className="w-full max-w-xl p-6 mb-10 space-y-8 sm:p-8 bg-white rounded-lg shadow dark:bg-gray-800">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-            Crear nueva cuenta
+            ¡Crea una nueva cuenta! Es gratis y rápido
           </h2>
           <form className="mt-8 space-y-6" action="#">
             <div>
@@ -113,7 +112,7 @@ function RegisterPage() {
               <input
                 type="email"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="name@company.com"
+                placeholder="nombre@company.com"
                 required
                 {...register("email", {
                   required: "Email necesario",

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import "../App.css";
 import AuthAPI, { LoginRequest } from "../api/AuthAPI";
 import Loading from "../components/Loading";
 import ApiErrorModal from "../components/modals/ApiErrorModal";
@@ -50,7 +49,7 @@ function LoginPage() {
         <Link to="/">
           <img
             src="/img/logo.png"
-            className="mr-4 h-24 rounded-3xl"
+            className="h-24 rounded-3xl"
             alt="Filmy logo"
           />
         </Link>
@@ -66,7 +65,7 @@ function LoginPage() {
               <input
                 type="email"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="name@company.com"
+                placeholder="nombre@company.com"
                 required
                 {...register("email", {
                   required: "Email necesario",

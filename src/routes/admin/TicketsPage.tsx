@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import TicketAPI, { Ticket, TicketCreate } from "../../api/TicketAPI";
 import DataTable from "../../components/admin/DataTable";
-import DeleteModal from "../../components/admin/DeleteModal";
+import DeleteModal from "../../components/modals/DeleteModal";
 import TicketCell from "../../components/admin/tickets/TicketCell";
 import useTickets from "../../hooks/useTickets";
 import { publish } from "../../utils/CustomEvents";

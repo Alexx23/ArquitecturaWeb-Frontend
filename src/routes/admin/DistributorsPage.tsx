@@ -4,7 +4,7 @@ import DistributorAPI, {
   DistributorCreate,
 } from "../../api/DistributorAPI";
 import DataTable from "../../components/admin/DataTable";
-import DeleteModal from "../../components/admin/DeleteModal";
+import DeleteModal from "../../components/modals/DeleteModal";
 import DistributorCell from "../../components/admin/distributors/DistributorCell";
 import DistributorForm from "../../components/admin/distributors/DistributorForm";
 import UpdateModal from "../../components/admin/UpdateModal";

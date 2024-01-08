@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import DirectorAPI, { Director, DirectorCreate } from "../../api/DirectorAPI";
 import DataTable from "../../components/admin/DataTable";
-import DeleteModal from "../../components/admin/DeleteModal";
+import DeleteModal from "../../components/modals/DeleteModal";
 import DirectorCell from "../../components/admin/directors/DirectorCell";
 import DirectorForm from "../../components/admin/directors/DirectorForm";
 import UpdateModal from "../../components/admin/UpdateModal";

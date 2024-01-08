@@ -4,7 +4,7 @@ import NationalityAPI, {
   NationalityCreate,
 } from "../../api/NationalityAPI";
 import DataTable from "../../components/admin/DataTable";
-import DeleteModal from "../../components/admin/DeleteModal";
+import DeleteModal from "../../components/modals/DeleteModal";
 import NationalityCell from "../../components/admin/nationalities/NationalityCell";
 import NationalityForm from "../../components/admin/nationalities/NationalityForm";
 import UpdateModal from "../../components/admin/UpdateModal";
