@@ -118,7 +118,8 @@ function MoviesPage() {
         onDelete={setDeleteId}
         onCreate={() => setUpdateMovie(false)}
         onUpdate={setUpdateMovie}
-        customUpdate={"Actores"}
+        customUpdateName={"Actores"}
+        customUpdateIcon={"users"}
         onCustomUpdate={setUpdateMovieActors}
       />
       <DeleteModal

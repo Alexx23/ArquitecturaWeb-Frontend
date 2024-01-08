@@ -22,15 +22,15 @@ function MovieActorForm({ movie, onSubmit }: Props) {
     setActorIds((prev) => [...prev, actorId]);
   };
 
+  const actorsUnselected = useMemo(() => {
+    return actors.filter((actor) => !actorIds.includes(actor.id));
+  }, [actors, actorIds]);
+
   const actorsFiltered = useMemo(() => {
-    return actors.filter(
-      (actor) =>
-        actor.name
-          .toLocaleLowerCase()
-          .includes(inputName.toLocaleLowerCase()) &&
-        !actorIds.includes(actor.id)
+    return actorsUnselected.filter((actor) =>
+      actor.name.toLocaleLowerCase().includes(inputName.toLocaleLowerCase())
     );
-  }, [actors, inputName, actorIds]);
+  }, [actorsUnselected, inputName]);
 
   useEffect(() => {
     if (!movie) return;
@@ -58,13 +58,13 @@ function MovieActorForm({ movie, onSubmit }: Props) {
               <span
                 key={actorId}
                 id="badge-dismiss-default"
-                className="inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-blue-800 bg-blue-100 rounded dark:bg-blue-900 dark:text-blue-300"
+                className="inline-flex items-center px-2 py-1 me-2 text-sm font-medium text-blue-800 bg-blue-100 rounded dark:bg-blue-900 dark:text-blue-100"
               >
                 {actors.find((actor) => actor.id === actorId)?.name}
                 <button
                   onClick={() => handleDeleteActor(actorId)}
                   type="button"
-                  className="inline-flex items-center p-1 ms-2 text-sm text-blue-400 bg-transparent rounded-sm hover:bg-blue-200 hover:text-blue-900 dark:hover:bg-blue-800 dark:hover:text-blue-300"
+                  className="inline-flex items-center p-1 ms-2 text-sm text-blue-400 bg-transparent rounded-sm hover:bg-blue-200 hover:text-blue-900 dark:hover:bg-blue-800 dark:hover:text-blue-100"
                   data-dismiss-target="#badge-dismiss-default"
                   aria-label="Remove"
                 >
@@ -88,37 +88,51 @@ function MovieActorForm({ movie, onSubmit }: Props) {
             ))}
           </div>
           <div className="col-span-4">
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Seleccionar nuevos actores
+            <label className="block my-2 text-sm font-medium text-gray-900 dark:text-white">
+              Añadir nuevos actores
             </label>
 
-            <input
-              value={inputName}
-              onChange={(e) => setInputName(e.target.value)}
-              type="text"
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              placeholder="Buscar actores"
-            />
-            <div className="rounded-md mt-4 max-h-40 overflow-x-hidden overflow-y-auto border-blue-200 border w-full text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700 bg-gray-100 dark:bg-gray-900">
-              {actorsFiltered.length === 0 && (
-                <span className="w-full inline-flex px-2 py-1 me-2 text-sm text-gray-800 dark:text-gray-300">
-                  No se han encontrado actores para añadir
-                </span>
-              )}
-              {actorsFiltered.map((actor) => (
-                <span
-                  onClick={() => handleAddActor(actor.id)}
-                  key={actor.id}
-                  className="w-full inline-flex px-2 py-1 me-2 text-sm font-medium text-gray-800 dark:text-gray-300 cursor-pointer"
-                >
-                  {actor.name}
-                  <FontAwesomeIcon
-                    icon="plus"
-                    className="w-4 h-4 text-gray-500 dark:text-gray-400 ml-auto"
-                  />
-                </span>
-              ))}
-            </div>
+            {actorsUnselected.length == 0 && (
+              <p className="text-red-500 text-base italic">
+                No hay nuevos actores disponibles para añadir
+              </p>
+            )}
+            {actorsUnselected.length >= 1 && (
+              <>
+                <input
+                  value={inputName}
+                  onChange={(e) => setInputName(e.target.value)}
+                  type="text"
+                  className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Buscar actores"
+                />
+                {actorsFiltered.length >= 1 && (
+                  <p className="text-gray-500 mt-2 text-base italic">
+                    Selecciona el actor que quieres añadir
+                  </p>
+                )}
+                <div className="rounded-md mt-2 max-h-40 overflow-x-hidden overflow-y-auto border-blue-200 border w-full text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700 bg-gray-100 dark:bg-gray-900">
+                  {actorsFiltered.length === 0 && (
+                    <span className="w-full italic inline-flex px-2 py-1 me-2 text-sm text-gray-800 dark:text-gray-300">
+                      No hay actores con ese nombre
+                    </span>
+                  )}
+                  {actorsFiltered.map((actor) => (
+                    <span
+                      onClick={() => handleAddActor(actor.id)}
+                      key={actor.id}
+                      className="w-full inline-flex px-2 py-1 me-2 text-sm font-medium text-gray-800 dark:text-gray-300 cursor-pointer"
+                    >
+                      {actor.name}
+                      <FontAwesomeIcon
+                        icon="plus"
+                        className="w-4 h-4 text-gray-500 dark:text-gray-400 ml-auto"
+                      />
+                    </span>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
