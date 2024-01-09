@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthAPI, { LoginRequest } from "../api/AuthAPI";
 import Loading from "../components/Loading";
 import ApiErrorModal from "../components/modals/ApiErrorModal";
+import RequestPasswordModal from "../components/modals/RequestPasswordModal";
 import SuccessModal from "../components/modals/SuccessModal";
 import { useUser } from "../context/UserContext";
 import { publish } from "../utils/CustomEvents";
@@ -15,6 +16,8 @@ function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
 
   const [showPassword, setShowPassword] = useState(false);
+  const [showRequestPasswordModal, setShowRequestPasswordModal] =
+    useState(false);
 
   const {
     register,
@@ -113,12 +116,12 @@ function LoginPage() {
               )}
             </div>
             <div className="flex items-start">
-              <Link
-                to="/request-password"
-                className="ml-auto text-sm text-primary-700 hover:underline dark:text-primary-500"
+              <span
+                onClick={() => setShowRequestPasswordModal(true)}
+                className="cursor-pointer ml-auto text-sm text-primary-700 hover:underline dark:text-primary-500"
               >
                 ¿Has olvidado tu contraseña?
-              </Link>
+              </span>
             </div>
             <button
               onClick={handleSubmit(submitForm)}
@@ -143,6 +146,10 @@ function LoginPage() {
       </div>
       <SuccessModal />
       <ApiErrorModal />
+      <RequestPasswordModal
+        show={showRequestPasswordModal}
+        onClose={() => setShowRequestPasswordModal(false)}
+      />
     </>
   );
 }
