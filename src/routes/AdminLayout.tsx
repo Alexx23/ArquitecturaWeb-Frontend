@@ -19,6 +19,7 @@ import SessionsPage from "./admin/SessionsPage";
 import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import CssBaseline from "@mui/material/CssBaseline";
 import themeConfigs from "../configs/theme.config";
+import AdminIndexPage from "./admin/AdminIndexPage";
 
 function AdminLayout() {
   const [sidebarMobileShow, setSidebarMobileShow] = useState(false);
@@ -64,6 +65,7 @@ function AdminLayout() {
           <div className="min-h-screen relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
             <main>
               <Routes>
+                <Route path="/" element={<AdminIndexPage />} />
                 <Route path="/movies" element={<MoviesPage />} />
                 <Route path="/genres" element={<GenresPage />} />
                 <Route path="/actors" element={<ActorsPage />} />

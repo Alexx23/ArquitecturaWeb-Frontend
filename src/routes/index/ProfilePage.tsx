@@ -16,7 +16,6 @@ import { publish } from "../../utils/CustomEvents";
 import { formatCardExpirationDate } from "../../utils/DateUtils";
 
 export default function ProfilePage() {
-  const [darkMode, setDarkMode] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [isDeletingCard, setIsDeletingCard] = useState(false);
@@ -27,22 +26,6 @@ export default function ProfilePage() {
 
   const { user } = useUser();
   const navigate = useNavigate();
-
-  const switchDarkMode = () => {
-    if (localStorage.getItem("dark-theme") == null) {
-      return;
-    }
-
-    if (localStorage.getItem("dark-theme") == "true") {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("dark-theme", "false");
-      setDarkMode(false);
-    } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("dark-theme", "true");
-      setDarkMode(true);
-    }
-  };
 
   const {
     register: registerUpdate,
@@ -127,10 +110,6 @@ export default function ProfilePage() {
     setValueUpdate("username", user?.username);
     setValueUpdate("email", user?.email);
   }, [user]);
-
-  useEffect(() => {
-    setDarkMode(localStorage.getItem("dark-theme") == "true");
-  }, []);
 
   return (
     <>
