@@ -14,6 +14,7 @@ interface Props<T> {
   isLoading: boolean;
   canEdit: boolean;
   canSearch: boolean;
+  customSearch?: () => React.ReactNode;
   customUpdateName?: string;
   customUpdateIcon?: IconProp;
   renderCell: (element: T) => React.ReactNode;
@@ -38,6 +39,7 @@ export default function DataTable<T>({
   isLoading,
   canEdit,
   canSearch,
+  customSearch,
   customUpdateName,
   customUpdateIcon,
   renderCell,
@@ -141,14 +143,18 @@ export default function DataTable<T>({
               <div className="items-center hidden mb-3 sm:flex sm:divide-x sm:divide-gray-100 sm:mb-0 dark:divide-gray-700">
                 <form className="lg:pr-3" action="#" method="GET">
                   <div className="relative mt-1 lg:w-64 xl:w-96">
-                    <input
-                      onChange={(e) => onSearch(e.target.value)}
-                      type="text"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                      placeholder={
-                        "Buscar " + title.toLocaleLowerCase() + " por nombre"
-                      }
-                    />
+                    {customSearch ? (
+                      customSearch()
+                    ) : (
+                      <input
+                        onChange={(e) => onSearch(e.target.value)}
+                        type="text"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                        placeholder={
+                          "Buscar " + title.toLocaleLowerCase() + " por nombre"
+                        }
+                      />
+                    )}
                   </div>
                 </form>
               </div>
