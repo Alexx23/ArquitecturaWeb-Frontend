@@ -1,4 +1,5 @@
-import { getMethod, Paginated } from ".";
+import { getMethod, Paginated, postMethod, putMethod } from ".";
+import { Card } from "./CardAPI";
 import { Ticket } from "./TicketAPI";
 
 export interface User {
@@ -18,11 +19,16 @@ export interface Role {
   userList: User[];
 }
 
-export interface Card {
-  id: number;
-  expiration: Date;
-  user: User[];
-  created_at: Date;
+export interface UserUpdate {
+  name?: string;
+  username?: string;
+  email?: string;
+}
+
+export interface ChangePassword {
+  current_password: string;
+  new_password: string;
+  new_password_confirmation: string;
 }
 
 export default class UserAPI {
@@ -45,5 +51,15 @@ export default class UserAPI {
       url = "/usersession";
     }
     return getMethod<User>(url);
+  }
+
+  public static async changePassword(
+    changePassword: ChangePassword
+  ): Promise<unknown> {
+    return postMethod<unknown>("/usersession/password", changePassword);
+  }
+
+  public static async updateUser(user: UserUpdate): Promise<User> {
+    return putMethod<User>("/usersession/", user);
   }
 }

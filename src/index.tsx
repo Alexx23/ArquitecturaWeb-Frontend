@@ -10,6 +10,11 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons/faPenToSquare";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons/faPaperPlane";
+import { faLock } from "@fortawesome/free-solid-svg-icons/faLock";
+import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons/faFloppyDisk";
+import { faCreditCard } from "@fortawesome/free-solid-svg-icons/faCreditCard";
+import { faEye } from "@fortawesome/free-solid-svg-icons/faEye";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons/faEyeSlash";
 import "flowbite/dist/flowbite.js";
 import "aos/dist/aos.css";
 import ReactDOM from "react-dom/client";
@@ -39,7 +44,12 @@ library.add(
   faPlus,
   faPenToSquare,
   faCartShopping,
-  faPaperPlane
+  faPaperPlane,
+  faLock,
+  faFloppyDisk,
+  faCreditCard,
+  faEye,
+  faEyeSlash
 );
 
 const root = ReactDOM.createRoot(

@@ -8,6 +8,7 @@ import ErrorBoundary from "./routes/errors/ErrorBoundary";
 import RequireAuth from "./utils/RequireAuth";
 import RoleEnum from "./utils/RoleEnum";
 import ClientMoviesPage from "./routes/ClientMoviesPage";
+import ProfilePage from "./routes/ProfilePage";
 
 function App() {
   return (
@@ -16,6 +17,15 @@ function App() {
         <Route index element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route
+          path="/profile"
+          element={
+            <>
+              <RequireAuth allowedRoles={[RoleEnum.CLIENT, RoleEnum.ADMIN]} />
+              <ProfilePage />
+            </>
+          }
+        />
         <Route path="/movies/*" element={<ClientMoviesPage />} />
       </Route>
       <Route
