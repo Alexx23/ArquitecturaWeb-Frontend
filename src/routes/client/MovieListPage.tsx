@@ -57,7 +57,7 @@ const MovieListPage = () => {
                 className="max-w-lg justify-center w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-3 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 {isLoading ? (
-                  <Loading color="fill-teal-500" size="h-6" />
+                  <Loading color="fill-teal-400" size="h-6" />
                 ) : (
                   <FontAwesomeIcon icon="plus" className="mr-2 w-4 h-4" />
                 )}

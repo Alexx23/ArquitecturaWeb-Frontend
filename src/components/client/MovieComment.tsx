@@ -158,7 +158,7 @@ const MovieComment = ({ movie }: Props) => {
       {isLoading ? (
         <Container header={`Comentarios`}>
           <div className="inline flex">
-            <Loading color="fill-teal-500" size="h-6" />
+            <Loading color="fill-teal-400" size="h-6" />
             <span className="ml-2">Cargando comentarios...</span>
           </div>
         </Container>
@@ -184,7 +184,7 @@ const MovieComment = ({ movie }: Props) => {
                   className="max-w-lg justify-center w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-3 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
                   {isLoading ? (
-                    <Loading color="fill-teal-500" size="h-6" />
+                    <Loading color="fill-teal-400" size="h-6" />
                   ) : (
                     <FontAwesomeIcon icon="plus" className="mr-2 w-4 h-4" />
                   )}
@@ -219,7 +219,7 @@ const MovieComment = ({ movie }: Props) => {
                     className="w-28 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-3 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                   >
                     {isCreating ? (
-                      <Loading color="fill-teal-500" size="h-6 w-6" />
+                      <Loading color="fill-teal-400" size="h-6 w-6" />
                     ) : (
                       <FontAwesomeIcon icon="paper-plane" className="mr-2" />
                     )}
