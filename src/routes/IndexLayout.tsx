@@ -42,7 +42,8 @@ function IndexLayout() {
     // Permitir que se muestre en pantalla completa en las rutas de /movies/:movieId
     if (
       pathname.toLocaleLowerCase().split("/")[1] == "movies" &&
-      pathname.toLocaleLowerCase().split("/")[2] != null
+      pathname.toLocaleLowerCase().split("/")[2] != null &&
+      pathname.toLocaleLowerCase().split("/")[2].length >= 1
     ) {
       return true;
     }
