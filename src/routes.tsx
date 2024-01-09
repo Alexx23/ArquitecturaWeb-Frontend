@@ -8,7 +8,7 @@ import ErrorBoundary from "./routes/errors/ErrorBoundary";
 import RequireAuth from "./utils/RequireAuth";
 import RoleEnum from "./utils/RoleEnum";
 import ClientMoviesPage from "./routes/ClientMoviesPage";
-import ProfilePage from "./routes/ProfilePage";
+import ProfilePage from "./routes/client/ProfilePage";
 
 function App() {
   return (

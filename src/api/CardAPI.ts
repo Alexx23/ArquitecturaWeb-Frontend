@@ -12,7 +12,7 @@ export interface Card {
 export interface CardCreate {
   title: string;
   card_number: number;
-  expiration: Date;
+  expiration: string;
   cvv: number;
 }
 

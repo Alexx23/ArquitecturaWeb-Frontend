@@ -1,16 +1,19 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import CardAPI, { Card } from "../api/CardAPI";
-import UserAPI, { ChangePassword, UserUpdate } from "../api/UserAPI";
-import ClientNavbar from "../components/client/ClientNavbar";
-import Loading from "../components/Loading";
-import ApiErrorModal from "../components/modals/ApiErrorModal";
-import DeleteModal from "../components/modals/DeleteModal";
-import SuccessModal from "../components/modals/SuccessModal";
-import { useUser } from "../context/UserContext";
-import { publish } from "../utils/CustomEvents";
-import { formatCardExpirationDate } from "../utils/DateUtils";
+import { useNavigate } from "react-router-dom";
+import CardAPI, { Card, CardCreate } from "../../api/CardAPI";
+import UserAPI, { ChangePassword, UserUpdate } from "../../api/UserAPI";
+import CardForm from "../../components/client/CardForm";
+import ClientNavbar from "../../components/client/ClientNavbar";
+import Loading from "../../components/Loading";
+import ApiErrorModal from "../../components/modals/ApiErrorModal";
+import DeleteModal from "../../components/modals/DeleteModal";
+import SuccessModal from "../../components/modals/SuccessModal";
+import UpdateModal from "../../components/modals/UpdateModal";
+import { useUser } from "../../context/UserContext";
+import { publish } from "../../utils/CustomEvents";
+import { formatCardExpirationDate } from "../../utils/DateUtils";
 
 export default function ProfilePage() {
   const [darkMode, setDarkMode] = useState(false);
@@ -20,8 +23,10 @@ export default function ProfilePage() {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [deleteCard, setDeleteCard] = useState<Card | null>(null);
+  const [showCreateCard, setShowCreateCard] = useState(false);
 
   const { user } = useUser();
+  const navigate = useNavigate();
 
   const switchDarkMode = () => {
     if (localStorage.getItem("dark-theme") == null) {
@@ -94,8 +99,8 @@ export default function ProfilePage() {
     setIsDeletingCard(true);
     CardAPI.deleteCard(deleteCard.id)
       .then((res) => {
-        console.log(res);
         publish("showSuccessMessage", "Tarjeta eliminada correctamente");
+        navigate(0); // Actualizar página
       })
       .catch((err) => {
         publish("showApiErrorMessage", err);
@@ -104,6 +109,17 @@ export default function ProfilePage() {
         setIsDeletingCard(false);
       });
     setDeleteCard(null);
+  };
+
+  const handleCreateCard = (data: CardCreate) => {
+    CardAPI.createCard(data)
+      .then((res) => {
+        publish("showSuccessMessage", "Tarjeta añadida correctamente");
+        navigate(0); // Actualizar página
+      })
+      .catch((err) => {
+        publish("showApiErrorMessage", err);
+      });
   };
 
   useEffect(() => {
@@ -164,7 +180,10 @@ export default function ProfilePage() {
                 ))}
               </ul>
               <div>
-                <button className="mt-2 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                <button
+                  onClick={() => setShowCreateCard(true)}
+                  className="mt-2 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                >
                   <FontAwesomeIcon icon="plus" className="mr-2 w-4 h-4" />
                   Añadir tarjeta
                 </button>
@@ -375,6 +394,13 @@ export default function ProfilePage() {
         show={deleteCard != null}
         onClose={() => setDeleteCard(null)}
         onDelete={submitDeleteCard}
+      />
+      <UpdateModal
+        show={showCreateCard}
+        title="Tarjeta"
+        element={undefined}
+        onClose={() => setShowCreateCard(false)}
+        renderForm={() => <CardForm onSubmit={handleCreateCard} />}
       />
     </>
   );
