@@ -150,7 +150,7 @@ function SessionForm({ session, onSubmit, selectedDate }: Props) {
               {...register("minute", {
                 required: "Minuto necesario",
                 min: {
-                  value: 1,
+                  value: 0,
                   message: "Minuto necesario",
                 },
                 max: {

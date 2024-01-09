@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -9,6 +10,8 @@ import { publish } from "../utils/CustomEvents";
 
 function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
+
+  const [showPassword, setShowPassword] = useState(false);
 
   const {
     register,
@@ -135,19 +138,26 @@ function RegisterPage() {
               <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
                 Contraseña
               </label>
-              <input
-                type="password"
-                placeholder="••••••••"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                required
-                {...register("password", {
-                  required: "Contraseña necesaria",
-                  minLength: {
-                    value: 8,
-                    message: "La contraseña debe tener al menos 8 caracteres",
-                  },
-                })}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Tu contraseña"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  required
+                  {...register("password", {
+                    required: "Contraseña necesaria",
+                    minLength: {
+                      value: 8,
+                      message: "La contraseña debe tener al menos 8 caracteres",
+                    },
+                  })}
+                />
+                <FontAwesomeIcon
+                  icon={showPassword ? "eye-slash" : "eye"}
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="text-gray-900 dark:text-white absolute right-0 top-1/2 transform -translate-y-1/2 px-3 py-2 w-6 h-6"
+                />
+              </div>
               {errors.password && (
                 <p className="pt-2 text-red-500 text-base italic">
                   {errors.password.message + ""}
@@ -159,8 +169,8 @@ function RegisterPage() {
                 Confirmar contraseña
               </label>
               <input
-                type="password"
-                placeholder="••••••••"
+                type={showPassword ? "text" : "password"}
+                placeholder="Tu contraseña"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 required
                 {...register("password_confirmation", {
