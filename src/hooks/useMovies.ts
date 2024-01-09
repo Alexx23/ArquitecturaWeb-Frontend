@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import MovieAPI, { Movie } from "../api/MovieAPI";
 import { publish } from "../utils/CustomEvents";
 
-function useMovies(inputName: string, accumulable: boolean = false) {
+function useMovies(inputName: string, availableMode: boolean = false) {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [actualPage, setActualPage] = useState(0);
   const [nextPage, setNextPage] = useState(1);
@@ -18,11 +18,8 @@ function useMovies(inputName: string, accumulable: boolean = false) {
 
     MovieAPI.getMovies(pageToRequest, inputName.length ? inputName : null)
       .then((res) => {
-        if (accumulable) {
-          setMovies((prevMovies) => [...prevMovies, ...res.data]);
-        } else {
-          setMovies(res.data);
-        }
+        setMovies(res.data);
+
         setActualPage(res.actual_page);
         setNextPage(res.has_more ? res.actual_page + 1 : -1);
         setPageSize(res.page_size);
@@ -44,13 +41,16 @@ function useMovies(inputName: string, accumulable: boolean = false) {
     if (pageToRequest <= 0) return;
     setIsLoading(true);
 
-    MovieAPI.getAvailableMovies(pageToRequest)
+    MovieAPI.getAvailableMovies(pageToRequest, inputName)
       .then((res) => {
-        if (accumulable) {
-          setMovies((prevMovies) => [...prevMovies, ...res.data]);
-        } else {
+        if (pageToRequest == 1) {
           setMovies(res.data);
+        } else {
+          setMovies((prevMovies) =>
+            removeDuplicates([...prevMovies, ...res.data])
+          );
         }
+
         setActualPage(res.actual_page);
         setNextPage(res.has_more ? res.actual_page + 1 : -1);
         setPageSize(res.page_size);
@@ -93,11 +93,21 @@ function useMovies(inputName: string, accumulable: boolean = false) {
       });
   };
 
+  const removeDuplicates = (arr: Movie[]) => {
+    return arr.filter(
+      (thing, index, self) => index === self.findIndex((t) => t.id === thing.id)
+    );
+  };
+
   useEffect(() => {
     if (!inputChanged) return;
     setIsLoading(true);
     const timer = setTimeout(() => {
-      requestMovies(1);
+      if (!availableMode) {
+        requestMovies(1);
+      } else {
+        requestAvailableMovies(1);
+      }
     }, 800);
     return () => clearTimeout(timer);
   }, [inputChanged, inputName]);
