@@ -1,19 +1,27 @@
-import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Divider, ListItemIcon, Menu, MenuItem } from "@mui/material";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 import { getAvatarUrl } from "../utils/RandomImage";
 import RoleEnum from "../utils/RoleEnum";
 
 export default function NavbarUser() {
   const { user, logout } = useUser();
+  const navigate = useNavigate();
+
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   return user ? (
     <div className="flex items-center ml-3">
       <div>
         <button
+          onClick={handleClick}
           type="button"
           className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-          aria-expanded="false"
-          data-dropdown-toggle="dropdown-profile"
         >
           <span className="sr-only">Menú usuario</span>
           <img
@@ -22,44 +30,79 @@ export default function NavbarUser() {
             alt="User photo"
           />
         </button>
-      </div>
-      <div
-        id="dropdown-profile"
-        className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600"
-      >
-        <div className="px-4 py-3" role="none">
-          <p className="text-sm text-gray-900 dark:text-white" role="none">
-            {user?.name}
-          </p>
-          <p
-            className="text-sm font-medium text-gray-900 truncate dark:text-gray-300"
-            role="none"
-          >
-            {user?.email}
-          </p>
-        </div>
-        <ul className="py-1" role="none">
+        <Menu
+          anchorEl={anchorEl}
+          id="account-menu"
+          open={Boolean(anchorEl)}
+          onClose={() => setAnchorEl(null)}
+          PaperProps={{
+            elevation: 0,
+            sx: {
+              overflow: "visible",
+              filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+              mt: 1.5,
+              "& .MuiAvatar-root": {
+                width: 32,
+                height: 32,
+                ml: -0.5,
+                mr: 1,
+              },
+              "&::before": {
+                content: '""',
+                display: "block",
+                position: "absolute",
+                top: 0,
+                right: 14,
+                width: 10,
+                height: 10,
+                bgcolor: "background.paper",
+                transform: "translateY(-50%) rotate(45deg)",
+                zIndex: 0,
+              },
+            },
+          }}
+          transformOrigin={{ horizontal: "right", vertical: "top" }}
+          anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+        >
+          <div className="px-4 py-2">
+            <p className="text-base text-gray-900 dark:text-white font-medium">
+              {user?.name}
+            </p>
+            <p className="text-sm text-gray-900 dark:text-gray-300">
+              {user?.email}
+            </p>
+          </div>
+          <Divider />
+          <MenuItem onClick={() => navigate("/")}>
+            <ListItemIcon>
+              <FontAwesomeIcon icon={"house"} className="w-4 h-4" />
+            </ListItemIcon>
+            Inicio
+          </MenuItem>
           {user.role.id == RoleEnum.ADMIN && (
-            <li>
-              <Link
-                to="/admin"
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                role="menuitem"
-              >
-                Panel
-              </Link>
-            </li>
+            <MenuItem onClick={() => navigate("/admin")}>
+              <ListItemIcon>
+                <FontAwesomeIcon icon={"gear"} className="w-4 h-4" />
+              </ListItemIcon>
+              Panel
+            </MenuItem>
           )}
-          <li>
-            <a
-              onClick={() => logout?.()}
-              className="cursor-pointer block px-4 py-2 text-sm text-red-700 hover:bg-red-100 dark:text-red-300 dark:hover:bg-red-600 dark:hover:text-white"
-              role="menuitem"
-            >
-              Cerrar sesión
-            </a>
-          </li>
-        </ul>
+          <MenuItem onClick={() => navigate("/profile")}>
+            <ListItemIcon>
+              <FontAwesomeIcon icon={"user"} className="w-4 h-4" />
+            </ListItemIcon>
+            Perfil
+          </MenuItem>
+          <MenuItem onClick={() => logout?.()}>
+            <ListItemIcon>
+              <FontAwesomeIcon
+                icon={"right-from-bracket"}
+                className="w-4 h-4"
+              />
+            </ListItemIcon>
+            Cerrar sesión
+          </MenuItem>
+        </Menu>
       </div>
     </div>
   ) : (

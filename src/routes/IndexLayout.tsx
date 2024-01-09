@@ -11,6 +11,9 @@ import RequireAuth from "../utils/RequireAuth";
 import RoleEnum from "../utils/RoleEnum";
 import ProfilePage from "./index/ProfilePage";
 import MoviesLayout from "./MoviesLayout";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import themeConfigs from "../configs/theme.config";
 
 function IndexLayout() {
   const [darkMode, setDarkMode] = useState(false);
@@ -69,43 +72,47 @@ function IndexLayout() {
 
   return (
     <>
-      {showNavbar && (
-        <Navbar darkMode={darkMode} switchDarkMode={switchDarkMode} />
-      )}
-      <div
-        className={fullScreen ? "" : "m-auto p-0.5 max-w-[1300px] min-h-screen"}
+      <ThemeProvider
+        theme={themeConfigs.custom({ mode: darkMode ? "dark" : "light" })}
       >
-        <div className={fullScreen ? "" : "mt-20 mx-8"}>
-          <main>
-            <Routes>
-              <Route index element={<IndexPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route
-                path="/terms-and-conditions"
-                element={<TermsConditionsPage />}
-              />
-              <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-              <Route
-                path="/movies/*"
-                element={<MoviesLayout darkMode={darkMode} />}
-              />
-              <Route
-                path="/profile"
-                element={
-                  <>
-                    <RequireAuth
-                      allowedRoles={[RoleEnum.CLIENT, RoleEnum.ADMIN]}
-                    />
-                    <ProfilePage />
-                  </>
-                }
-              />
-            </Routes>
-          </main>
+        <CssBaseline />
+        {showNavbar && (
+          <Navbar darkMode={darkMode} switchDarkMode={switchDarkMode} />
+        )}
+        <div
+          className={
+            fullScreen ? "" : "m-auto p-0.5 max-w-[1300px] min-h-screen"
+          }
+        >
+          <div className={fullScreen ? "" : "mt-20 mx-8"}>
+            <main>
+              <Routes>
+                <Route index element={<IndexPage darkMode={darkMode} />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route
+                  path="/terms-and-conditions"
+                  element={<TermsConditionsPage />}
+                />
+                <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+                <Route path="/movies/*" element={<MoviesLayout />} />
+                <Route
+                  path="/profile"
+                  element={
+                    <>
+                      <RequireAuth
+                        allowedRoles={[RoleEnum.CLIENT, RoleEnum.ADMIN]}
+                      />
+                      <ProfilePage />
+                    </>
+                  }
+                />
+              </Routes>
+            </main>
+          </div>
+          {showNavbar && <Footer />}
         </div>
-        {showNavbar && <Footer />}
-      </div>
+      </ThemeProvider>
     </>
   );
 }

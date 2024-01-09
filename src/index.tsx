@@ -15,6 +15,9 @@ import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons/faFloppyDisk";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons/faCreditCard";
 import { faEye } from "@fortawesome/free-solid-svg-icons/faEye";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons/faEyeSlash";
+import { faGear } from "@fortawesome/free-solid-svg-icons/faGear";
+import { faUser } from "@fortawesome/free-solid-svg-icons/faUser";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons/faRightFromBracket";
 import "flowbite/dist/flowbite.js";
 import "aos/dist/aos.css";
 import ReactDOM from "react-dom/client";
@@ -49,7 +52,10 @@ library.add(
   faFloppyDisk,
   faCreditCard,
   faEye,
-  faEyeSlash
+  faEyeSlash,
+  faGear,
+  faUser,
+  faRightFromBracket
 );
 
 const root = ReactDOM.createRoot(

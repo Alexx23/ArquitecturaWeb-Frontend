@@ -4,33 +4,18 @@ import { useUser } from "../../context/UserContext";
 import NavbarUser from "../NavbarUser";
 
 interface Props {
+  darkMode: boolean;
+  switchDarkMode(): void;
   sidebarMobileShow: boolean;
   onClickSidebarMobile(): void;
 }
 
-const AdminNavbar = ({ sidebarMobileShow, onClickSidebarMobile }: Props) => {
-  const [darkMode, setDarkMode] = useState(false);
-
-  const switchDarkMode = () => {
-    if (localStorage.getItem("dark-theme") == null) {
-      return;
-    }
-
-    if (localStorage.getItem("dark-theme") == "true") {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("dark-theme", "false");
-      setDarkMode(false);
-    } else {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("dark-theme", "true");
-      setDarkMode(true);
-    }
-  };
-
-  useEffect(() => {
-    setDarkMode(localStorage.getItem("dark-theme") == "true");
-  }, []);
-
+const AdminNavbar = ({
+  darkMode,
+  switchDarkMode,
+  sidebarMobileShow,
+  onClickSidebarMobile,
+}: Props) => {
   return (
     <nav className="fixed z-30 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 h-18">
       <div className="px-3 py-3 lg:px-5 lg:pl-3">

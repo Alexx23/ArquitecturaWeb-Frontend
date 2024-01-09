@@ -2,7 +2,11 @@ import { useEffect } from "react";
 import AOS from "aos";
 import { Link } from "react-router-dom";
 
-function IndexPage() {
+interface Props {
+  darkMode: boolean;
+}
+
+function IndexPage({ darkMode }: Props) {
   useEffect(() => {
     AOS.init({
       once: true,
@@ -13,7 +17,7 @@ function IndexPage() {
   });
 
   return (
-    <main className="grow dark:bg-gray-50">
+    <main className="grow">
       <section className="relative min-h-screen">
         <div
           className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none -z-1"
@@ -33,9 +37,12 @@ function IndexPage() {
                 y2="100%"
                 id="illustration-01"
               >
-                <stop stopColor="#FFF" offset="0%" />
-                <stop stopColor="#EAEAEA" offset="77.402%" />
-                <stop stopColor="#DFDFDF" offset="100%" />
+                <stop stopColor={darkMode ? "#202020" : "#FFF"} offset="0%" />
+                <stop
+                  stopColor={darkMode ? "#151515" : "#EAEAEA"}
+                  offset="77.402%"
+                />
+                <stop stopColor={darkMode ? "#000" : "#DFDFDF"} offset="100%" />
               </linearGradient>
             </defs>
             <g fill="url(#illustration-01)" fillRule="evenodd">
@@ -60,7 +67,7 @@ function IndexPage() {
                 />
               </Link>
               <h1
-                className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4"
+                className="text-5xl md:text-6xl font-extrabold leading-tighter tracking-tighter mb-4 dark:text-white"
                 data-aos="zoom-y-out"
                 data-aos-delay="150"
               >
@@ -71,7 +78,7 @@ function IndexPage() {
               </h1>
               <div className="max-w-3xl mx-auto">
                 <p
-                  className="text-xl text-gray-600 mb-8"
+                  className="text-xl text-gray-600 mb-8 dark:text-gray-300"
                   data-aos="zoom-y-out"
                   data-aos-delay="300"
                 >
