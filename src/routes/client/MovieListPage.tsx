@@ -11,13 +11,11 @@ import useMovies from "../../hooks/useMovies";
 const MovieListPage = () => {
   const [inputName, setInputName] = useState("");
 
-  const { movies, nextPage, isLoading, setInputChanged, fetchNext } = useMovies(
-    inputName,
-    true
-  );
+  const { movies, nextPage, isLoading, setInputChanged, fetchNextAvailable } =
+    useMovies(inputName, true);
 
   useEffect(() => {
-    fetchNext();
+    fetchNextAvailable();
   }, []);
 
   return (
@@ -56,7 +54,7 @@ const MovieListPage = () => {
           <div className="text-center mb-8">
             {nextPage > 1 && (
               <button
-                onClick={fetchNext}
+                onClick={fetchNextAvailable}
                 className="max-w-lg justify-center w-full text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-3 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 {isLoading ? (

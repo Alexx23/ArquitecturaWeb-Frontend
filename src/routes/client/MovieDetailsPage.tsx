@@ -119,12 +119,16 @@ const MovieDetailsPage = () => {
                 >
                   {`${movie.name} ${`(${movie.year})`}`}
                 </Typography>
-
+                <span
+                  style={{ marginTop: 0 }}
+                  className="mt-[-40px] text-lg font-semibold text-gray-900 dark:text-gray-100"
+                >
+                  {movie.original_title}
+                </span>
                 <button className="max-w-[15rem] z-[5] text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-3 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                   <FontAwesomeIcon icon="cart-shopping" className="mr-2" />
                   COMPRAR ENTRADAS
                 </button>
-
                 <Stack direction="row" spacing={1} alignItems="center">
                   <span className="text-base text-gray-900 dark:text-gray-100">
                     Género:
@@ -145,7 +149,6 @@ const MovieDetailsPage = () => {
                     {movie.age_classification.name}
                   </span>
                 </Stack>
-
                 <p className="text-base text-gray-900 dark:text-gray-100">
                   {movie.synopsis}fdsf
                 </p>
@@ -157,7 +160,6 @@ const MovieDetailsPage = () => {
                   <br />
                   Distribuidor: {movie.distributor.name}
                 </p>
-
                 {movie.actor_list.length > 0 && (
                   <Container header="Reparto">
                     <CastSlide actors={movie.actor_list} />

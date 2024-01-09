@@ -62,6 +62,17 @@ export default class MovieAPI {
     return getMethod<Paginated<Movie>>(url);
   }
 
+  public static async getAvailableMovies(
+    page: number
+  ): Promise<Paginated<Movie>> {
+    let url = "/movie/available?page=" + page;
+    return getMethod<Paginated<Movie>>(url);
+  }
+
+  public static async getAllMovies(): Promise<Movie[]> {
+    return getMethod<Movie[]>("/movie/all");
+  }
+
   public static async getMovie(id: number): Promise<Movie> {
     return getMethod<Movie>("/movie/" + id);
   }
