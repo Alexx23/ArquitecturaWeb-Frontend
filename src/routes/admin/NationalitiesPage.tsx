@@ -7,7 +7,7 @@ import DataTable from "../../components/admin/DataTable";
 import DeleteModal from "../../components/modals/DeleteModal";
 import NationalityCell from "../../components/admin/nationalities/NationalityCell";
 import NationalityForm from "../../components/admin/nationalities/NationalityForm";
-import UpdateModal from "../../components/admin/UpdateModal";
+import UpdateModal from "../../components/modals/UpdateModal";
 import useNationalities from "../../hooks/useNationalities";
 import { publish } from "../../utils/CustomEvents";
 

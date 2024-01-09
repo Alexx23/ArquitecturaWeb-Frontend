@@ -4,7 +4,7 @@ import DataTable from "../../components/admin/DataTable";
 import DeleteModal from "../../components/modals/DeleteModal";
 import GenreCell from "../../components/admin/genres/GenreCell";
 import GenreForm from "../../components/admin/genres/GenreForm";
-import UpdateModal from "../../components/admin/UpdateModal";
+import UpdateModal from "../../components/modals/UpdateModal";
 import useGenres from "../../hooks/useGenres";
 import { publish } from "../../utils/CustomEvents";
 

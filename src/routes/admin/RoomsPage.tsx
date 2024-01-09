@@ -4,7 +4,7 @@ import DataTable from "../../components/admin/DataTable";
 import DeleteModal from "../../components/modals/DeleteModal";
 import RoomCell from "../../components/admin/rooms/RoomCell";
 import RoomForm from "../../components/admin/rooms/RoomForm";
-import UpdateModal from "../../components/admin/UpdateModal";
+import UpdateModal from "../../components/modals/UpdateModal";
 import useRooms from "../../hooks/useRooms";
 import { publish } from "../../utils/CustomEvents";
 

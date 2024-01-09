@@ -7,7 +7,7 @@ import DataTable from "../../components/admin/DataTable";
 import DeleteModal from "../../components/modals/DeleteModal";
 import DistributorCell from "../../components/admin/distributors/DistributorCell";
 import DistributorForm from "../../components/admin/distributors/DistributorForm";
-import UpdateModal from "../../components/admin/UpdateModal";
+import UpdateModal from "../../components/modals/UpdateModal";
 import useDistributors from "../../hooks/useDistributors";
 import { publish } from "../../utils/CustomEvents";
 

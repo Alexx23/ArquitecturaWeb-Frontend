@@ -4,7 +4,7 @@ import DataTable from "../../components/admin/DataTable";
 import DeleteModal from "../../components/modals/DeleteModal";
 import DirectorCell from "../../components/admin/directors/DirectorCell";
 import DirectorForm from "../../components/admin/directors/DirectorForm";
-import UpdateModal from "../../components/admin/UpdateModal";
+import UpdateModal from "../../components/modals/UpdateModal";
 import useDirectors from "../../hooks/useDirectors";
 import { publish } from "../../utils/CustomEvents";
 

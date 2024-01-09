@@ -4,7 +4,7 @@ import DataTable from "../../components/admin/DataTable";
 import DeleteModal from "../../components/modals/DeleteModal";
 import ActorCell from "../../components/admin/actors/ActorCell";
 import ActorForm from "../../components/admin/actors/ActorForm";
-import UpdateModal from "../../components/admin/UpdateModal";
+import UpdateModal from "../../components/modals/UpdateModal";
 import useActors from "../../hooks/useActors";
 import { publish } from "../../utils/CustomEvents";
 

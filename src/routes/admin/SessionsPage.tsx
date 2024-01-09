@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SessionAPI, { Session, SessionCreate } from "../../api/SessionAPI";
 import DataTable from "../../components/admin/DataTable";
 import DeleteModal from "../../components/modals/DeleteModal";
-import UpdateModal from "../../components/admin/UpdateModal";
+import UpdateModal from "../../components/modals/UpdateModal";
 import useSessions from "../../hooks/useSessions";
 import DatePicker from "react-datepicker";
 import { publish } from "../../utils/CustomEvents";
