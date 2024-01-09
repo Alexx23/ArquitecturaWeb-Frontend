@@ -36,4 +36,14 @@ export default class UserAPI {
     }
     return getMethod<Paginated<User>>(url);
   }
+
+  public static async getUser(id?: number): Promise<User> {
+    let url;
+    if (id) {
+      url = "/user/" + id;
+    } else {
+      url = "/usersession";
+    }
+    return getMethod<User>(url);
+  }
 }

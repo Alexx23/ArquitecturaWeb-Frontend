@@ -8,7 +8,8 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthAPI from "../api/AuthAPI";
-import { User } from "../api/UserAPI";
+import UserAPI, { User } from "../api/UserAPI";
+import RoleEnum from "../utils/RoleEnum";
 
 export interface UserContextInterface {
   user: User | null;
@@ -25,18 +26,32 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
 
   const logout = () => {
-    AuthAPI.logout().finally(() => {
-      setUser(null);
-      localStorage.clear();
-      window.location.href = "/login";
-    });
+    AuthAPI.logout()
+      .catch((err) => {
+        /* */
+      })
+      .finally(() => {
+        if (user?.role.id == RoleEnum.ADMIN) {
+          window.location.href = "/login";
+        }
+        setUser(null);
+        localStorage.clear();
+      });
   };
 
   useEffect(() => {
     const userLocalStorage = localStorage.getItem("user");
     if (userLocalStorage != null) {
-      setUser(JSON.parse(userLocalStorage));
-      console.log("usuario añadido desde caché");
+      UserAPI.getUser()
+        .then((user) => {
+          setUser(user);
+          localStorage.setItem("user", JSON.stringify(user));
+          console.debug("[Context] Usuario actualizado");
+        })
+        .catch(() => {
+          console.debug("[Context] Usuario sin sesión");
+          logout();
+        });
     }
   }, []);
 
