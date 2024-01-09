@@ -6,7 +6,7 @@ interface Props {
 }
 
 const AdminSidebar = ({ sidebarMobileShow }: Props) => {
-  const { hash, pathname, search } = useLocation();
+  const { pathname } = useLocation();
 
   const isPathActive = (path: string[]) => {
     return path.some((p) => pathname.toLocaleLowerCase().includes(p));

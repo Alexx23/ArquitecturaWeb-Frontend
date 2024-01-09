@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import AOS from "aos";
 import { Link } from "react-router-dom";
 
-function Home() {
+function IndexPage() {
   useEffect(() => {
     AOS.init({
       once: true,
@@ -15,7 +15,6 @@ function Home() {
   return (
     <main className="grow dark:bg-gray-50">
       <section className="relative min-h-screen">
-        {/* Illustration behind hero content */}
         <div
           className="absolute left-1/2 transform -translate-x-1/2 bottom-0 pointer-events-none -z-1"
           aria-hidden="true"
@@ -47,9 +46,7 @@ function Home() {
         </div>
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          {/* Hero content */}
           <div className="pt-32 pb-12 md:pt-40 md:pb-20">
-            {/* Section header */}
             <div className="text-center pb-12 md:pb-16">
               <Link
                 to="/"
@@ -119,4 +116,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default IndexPage;

@@ -2,11 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import AuthAPI, { RegisterRequest } from "../api/AuthAPI";
-import Loading from "../components/Loading";
-import ApiErrorModal from "../components/modals/ApiErrorModal";
-import SuccessModal from "../components/modals/SuccessModal";
-import { publish } from "../utils/CustomEvents";
+import AuthAPI, { RegisterRequest } from "../../api/AuthAPI";
+import Loading from "../../components/Loading";
+import ApiErrorModal from "../../components/modals/ApiErrorModal";
+import SuccessModal from "../../components/modals/SuccessModal";
+import { publish } from "../../utils/CustomEvents";
 
 function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -202,7 +202,7 @@ function RegisterPage() {
                 <label className="font-medium text-gray-900 dark:text-white">
                   Acepto los{" "}
                   <Link
-                    to="/terms_and_conditions"
+                    to="/terms-and-conditions"
                     className="text-primary-700 hover:underline dark:text-primary-500"
                   >
                     Términos y Condiciones de uso
@@ -231,8 +231,6 @@ function RegisterPage() {
           </form>
         </div>
       </div>
-      <SuccessModal />
-      <ApiErrorModal />
     </>
   );
 }

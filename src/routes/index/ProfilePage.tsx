@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import CardAPI, { Card, CardCreate } from "../../api/CardAPI";
 import UserAPI, { ChangePassword, UserUpdate } from "../../api/UserAPI";
 import CardForm from "../../components/client/CardForm";
-import ClientNavbar from "../../components/client/ClientNavbar";
+import Navbar from "../../components/client/Navbar";
 import Loading from "../../components/Loading";
 import ApiErrorModal from "../../components/modals/ApiErrorModal";
 import DeleteModal from "../../components/modals/DeleteModal";
@@ -134,8 +134,7 @@ export default function ProfilePage() {
 
   return (
     <>
-      <ClientNavbar darkMode={darkMode} switchDarkMode={switchDarkMode} />
-      <div className="m-auto max-w-[1366px] pt-20 pb-40 grid grid-cols-1 px-4 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
+      <div className="pb-40 grid grid-cols-1 xl:grid-cols-3 xl:gap-4 dark:bg-gray-900">
         <div className="mb-4 col-span-full xl:mb-2">
           <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
             Ajustes de perfil
@@ -388,8 +387,6 @@ export default function ProfilePage() {
           </div>
         </div>
       </div>
-      <ApiErrorModal />
-      <SuccessModal />
       <DeleteModal
         show={deleteCard != null}
         onClose={() => setDeleteCard(null)}

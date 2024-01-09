@@ -2,14 +2,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import AuthAPI, { LoginRequest } from "../api/AuthAPI";
-import Loading from "../components/Loading";
-import ApiErrorModal from "../components/modals/ApiErrorModal";
-import RequestPasswordModal from "../components/modals/RequestPasswordModal";
-import SuccessModal from "../components/modals/SuccessModal";
-import { useUser } from "../context/UserContext";
-import { publish } from "../utils/CustomEvents";
-import RoleEnum from "../utils/RoleEnum";
+import AuthAPI, { LoginRequest } from "../../api/AuthAPI";
+import Loading from "../../components/Loading";
+import ApiErrorModal from "../../components/modals/ApiErrorModal";
+import RequestPasswordModal from "../../components/modals/RequestPasswordModal";
+import SuccessModal from "../../components/modals/SuccessModal";
+import { useUser } from "../../context/UserContext";
+import { publish } from "../../utils/CustomEvents";
+import RoleEnum from "../../utils/RoleEnum";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -144,8 +144,6 @@ function LoginPage() {
           </form>
         </div>
       </div>
-      <SuccessModal />
-      <ApiErrorModal />
       <RequestPasswordModal
         show={showRequestPasswordModal}
         onClose={() => setShowRequestPasswordModal(false)}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import AdminFooter from "../components/admin/Footer";
+import Footer from "../components/Footer";
 import AdminNavbar from "../components/admin/AdminNavbar";
 import AdminSidebar from "../components/admin/Sidebar";
 import ApiErrorModal from "../components/modals/ApiErrorModal";
@@ -45,11 +45,9 @@ function AdminPage() {
               <Route path="*" element={<Error404 goTo="/admin" />} />
             </Routes>
           </main>
-          <AdminFooter />
+          <Footer />
         </div>
       </div>
-      <ApiErrorModal />
-      <SuccessModal />
     </>
   );
 }
