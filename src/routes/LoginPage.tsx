@@ -32,7 +32,7 @@ function LoginPage() {
         if (res.role.id == RoleEnum.ADMIN) {
           window.location.href = "/admin";
         } else if (res.role.id == RoleEnum.CLIENT) {
-          navigate("/panel");
+          navigate("/movies");
         }
       })
       .catch((err) => {

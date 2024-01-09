@@ -29,7 +29,6 @@ function RegisterPage() {
       password_confirmation: data.password_confirmation,
     })
       .then((res) => {
-        console.log(res);
         publish("showSuccessMessage", "¡Has sido registrado correctamente!");
       })
       .catch((err) => {

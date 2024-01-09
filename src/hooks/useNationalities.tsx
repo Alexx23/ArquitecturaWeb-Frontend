@@ -54,7 +54,6 @@ function useNationalities(inputName: string) {
         setTotalSize(-1);
       })
       .catch((err) => {
-        console.log(err);
         publish(
           "showApiErrorMessage",
           "No se ha podido cargar la lista de nacionalidades correctamente. Por favor, inténtalo de nuevo en unos minutos."
