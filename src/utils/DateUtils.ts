@@ -5,4 +5,9 @@ function formatDate(date: Date): string {
   return formattedDate;
 }
 
-export { formatDate };
+function formatHour(date: Date): string {
+  const formattedDate = `${date.getHours()}:${date.getMinutes()}`;
+  return formattedDate;
+}
+
+export { formatDate, formatHour };
