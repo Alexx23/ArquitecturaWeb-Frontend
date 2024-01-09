@@ -22,6 +22,11 @@ import "./utils/DarkMode";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import "react-datepicker/dist/react-datepicker.css";
+
+import es from "date-fns/locale/es";
+import { registerLocale } from "react-datepicker";
+registerLocale("es", es);
 
 library.add(
   faAngleLeft,

@@ -20,6 +20,7 @@
     "axios": "^1.6.3",
     "flowbite": "^2.2.1",
     "react": "^18.2.0",
+    "react-datepicker": "^4.25.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.2",
     "react-router-dom": "^6.21.1",
@@ -55,6 +56,7 @@
   "author": "Alexx23 <alexandromadrid10@gmail.com>",
   "license": "MIT",
   "devDependencies": {
-    "@types/aos": "^3.0.7"
+    "@types/aos": "^3.0.7",
+    "@types/react-datepicker": "^4.19.5"
   }
 }
