@@ -186,6 +186,15 @@ const MovieDetailsPage = () => {
                   Director: {movie.director.name}
                   <br />
                   Distribuidor: {movie.distributor.name}
+                  <br />
+                  Página web oficial:
+                  <a
+                    href={movie.web}
+                    target="_blank"
+                    className="ml-1 text-primary-700 hover:underline dark:text-primary-500"
+                  >
+                    {movie.web}
+                  </a>
                 </p>
                 {movie.actor_list.length > 0 && (
                   <Container header="Reparto">
