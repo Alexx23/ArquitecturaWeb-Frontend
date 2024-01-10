@@ -41,7 +41,7 @@ function PayModal({ show, onClose, onOpen, buyObject, prices }: Props) {
       ...buyObject,
       card_id: card.id,
     };
-    console.log(paymentCreate);
+
     PaymentAPI.createPayment(paymentCreate)
       .then((res) => {
         publish("showSuccessMessage", "Tickets comprados correctamente");

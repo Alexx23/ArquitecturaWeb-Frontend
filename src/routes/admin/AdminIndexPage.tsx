@@ -1,14 +1,56 @@
-export default function AdminIndexPage() {
+import { useEffect, useState } from "react";
+import PaymentAPI, { Payment } from "../../api/PaymentAPI";
+import DataTable from "../../components/admin/DataTable";
+import DeleteModal from "../../components/modals/DeleteModal";
+import PaymentCell from "../../components/admin/payments/PaymentCell";
+import usePayments from "../../hooks/usePayments";
+import { publish } from "../../utils/CustomEvents";
+
+function AdminIndexPage() {
+  const {
+    payments,
+    nextPage,
+    actualPage,
+    pageSize,
+    totalSize,
+    isLoading,
+    fetchNext,
+    fetchPrevious,
+  } = usePayments("");
+
+  useEffect(() => {
+    fetchNext();
+  }, []);
+
   return (
     <>
-      <div className="mb-40 mt-4 mx-4">
-        <p className="mx-10 text-justify mt-12 text-base text-gray-900 dark:text-gray-50">
-          Bienvenido al panel de administración de Filmy. Desde aquí podrás
-          gestionar todos los datos de la aplicación. Selecciona una de las
-          opciones del menú de navegación que tienes a tu izquierda para
-          comenzar.
-        </p>
-      </div>
+      <DataTable
+        data={payments}
+        title={"Panel de ventas"}
+        columns={[
+          "Usuario",
+          "Fecha de Compra",
+          "Precio",
+          "Referencia",
+          "Titular de compra",
+        ]}
+        actualPage={actualPage}
+        pageSize={pageSize}
+        totalSize={totalSize}
+        nextPage={nextPage}
+        isLoading={isLoading}
+        canEdit={false}
+        canSearch={false}
+        renderCell={(payment: Payment) => <PaymentCell payment={payment} />}
+        onNextPage={fetchNext}
+        onPreviousPage={fetchPrevious}
+        onSearch={() => {}}
+        onDelete={() => {}}
+        onCreate={() => {}}
+        onUpdate={() => {}}
+      />
     </>
   );
 }
+
+export default AdminIndexPage;

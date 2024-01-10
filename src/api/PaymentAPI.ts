@@ -12,7 +12,6 @@ export interface Payment {
   reference: string;
   amount: number;
   card_title: string;
-  card_number: number;
   user: User;
   created_at: Date;
 }
@@ -31,7 +30,7 @@ export default class PaymentAPI {
     page: number,
     name?: string | null
   ): Promise<Paginated<Payment>> {
-    let url = "/ticket?page=" + page;
+    let url = "/payment?page=" + page;
     if (name) {
       url += "&name=" + name;
     }

@@ -12,6 +12,7 @@ import { BuyObject } from "../../api/PaymentAPI";
 import { useLocation, useNavigate } from "react-router-dom";
 import AccountNeededModal from "./AccountNeededModal";
 import { Price } from "../../api/PriceAPI";
+import { publish } from "../../utils/CustomEvents";
 
 interface Props {
   show: boolean;
@@ -72,7 +73,10 @@ function SessionRoomModal({
         setSession(session);
       })
       .catch((error) => {
-        console.log(error);
+        publish(
+          "showApiErrorMessage",
+          "No se ha podido cargar la sesión correctamente. Inténtalo de nuevo en unos minutos"
+        );
       });
   };
 
