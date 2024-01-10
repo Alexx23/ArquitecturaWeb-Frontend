@@ -21,10 +21,12 @@ export default class TicketAPI {
   public static async createPayment(
     paymentRequest: PaymentCreate
   ): Promise<unknown> {
-    /*const object: { [index: number]: string } = {};
-    tickets.forEach((ticket, index) => {
-      object[index] = `${ticket.depth}:${ticket.seat}`;
-    });*/
-    return postMethod<unknown>("/payment", paymentRequest);
+    const paymentRequestClone: any = { ...paymentRequest };
+    const seatsObject: { [index: number]: string } = {};
+    paymentRequest.seats.forEach((seat, index) => {
+      seatsObject[index] = `${seat.depth}:${seat.seat}`;
+    });
+    paymentRequestClone.seats = seatsObject;
+    return postMethod<unknown>("/payment", paymentRequestClone);
   }
 }

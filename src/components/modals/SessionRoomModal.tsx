@@ -11,6 +11,7 @@ import TicketAPI, { TicketSeat } from "../../api/TicketAPI";
 import { BuyObject } from "../../api/PaymentAPI";
 import { useLocation, useNavigate } from "react-router-dom";
 import AccountNeededModal from "./AccountNeededModal";
+import { Price } from "../../api/PriceAPI";
 
 interface Props {
   show: boolean;
@@ -18,6 +19,7 @@ interface Props {
   onCloseAll: () => void;
   sessionId: number | null;
   sessionDate: Date | null;
+  prices: Price[];
 }
 function SessionRoomModal({
   show,
@@ -25,6 +27,7 @@ function SessionRoomModal({
   onCloseAll,
   sessionId,
   sessionDate,
+  prices,
 }: Props) {
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
   const [occupiedSeats, setOccupiedSeats] = useState<string[]>([]);
@@ -33,7 +36,6 @@ function SessionRoomModal({
   const [buyUrl, setBuyUrl] = useState("");
 
   const { pathname } = useLocation();
-  const navigate = useNavigate();
 
   const { user } = useUser();
 
@@ -124,7 +126,7 @@ function SessionRoomModal({
   return (
     <>
       <Transition appear show={show} as={Fragment}>
-        <Dialog as="div" className="relative z-30" onClose={onClose}>
+        <Dialog as="div" className="relative z-50" onClose={onClose}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -179,23 +181,37 @@ function SessionRoomModal({
                       </svg>
                     </button>
                   </div>
-                  <div className="mx-6 flex items-start justify-between p-5 border-b rounded-t dark:border-gray-700">
-                    <h3 className="text-lg font-semibold dark:text-white">
-                      Butacas seleccionadas:
-                      {selectedSeats.length === 0 && (
-                        <span className="text-base font-medium dark:text-white">
-                          {" " + "No has seleccionado ninguna butaca"}
+                  <div className="mx-6 p-5 border-b rounded-t dark:border-gray-700">
+                    <div className="flex items-start justify-between">
+                      <h3 className="text-lg font-semibold dark:text-white">
+                        Butacas seleccionadas:
+                        {selectedSeats.length === 0 && (
+                          <span className="text-base font-medium dark:text-white">
+                            {" " + "No has seleccionado ninguna butaca"}
+                          </span>
+                        )}
+                        {printSeats}
+                      </h3>
+                      <button
+                        onClick={handleBuy}
+                        className="max-w-[15rem] text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-3 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                      >
+                        <FontAwesomeIcon
+                          icon="cart-shopping"
+                          className="mr-2"
+                        />
+                        Comprar
+                      </button>
+                    </div>
+                    {prices.length > 0 && (
+                      <div className="flex items-start justify-between mt-1">
+                        <span>Precio por butaca: {prices[0].amount + "€"}</span>
+                        <span className="font-semibold mx-3">
+                          Precio total:{" "}
+                          {prices[0].amount * selectedSeats.length + "€"}
                         </span>
-                      )}
-                      {printSeats}
-                    </h3>
-                    <button
-                      onClick={handleBuy}
-                      className="max-w-[15rem] z-[5] text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-3 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                    >
-                      <FontAwesomeIcon icon="cart-shopping" className="mr-2" />
-                      Comprar
-                    </button>
+                      </div>
+                    )}
                   </div>
 
                   {!session ? (

@@ -20,14 +20,16 @@ import CardAPI, { Card, CardCreate } from "../../api/CardAPI";
 import { publish } from "../../utils/CustomEvents";
 import { useNavigate } from "react-router-dom";
 import PaymentAPI, { BuyObject, PaymentCreate } from "../../api/PaymentAPI";
+import { Price } from "../../api/PriceAPI";
 
 interface Props {
   show: boolean;
   onClose: () => void;
   onOpen: () => void;
   buyObject: BuyObject | null;
+  prices: Price[];
 }
-function PayModal({ show, onClose, onOpen, buyObject }: Props) {
+function PayModal({ show, onClose, onOpen, buyObject, prices }: Props) {
   const [showCreateCard, setShowCreateCard] = useState(false);
 
   const { user } = useUser();
@@ -39,10 +41,11 @@ function PayModal({ show, onClose, onOpen, buyObject }: Props) {
       ...buyObject,
       card_id: card.id,
     };
-
+    console.log(paymentCreate);
     PaymentAPI.createPayment(paymentCreate)
       .then((res) => {
         publish("showSuccessMessage", "Tickets comprados correctamente");
+        onClose();
       })
       .catch((err) => {
         publish("showApiErrorMessage", err);
@@ -122,6 +125,14 @@ function PayModal({ show, onClose, onOpen, buyObject }: Props) {
                     </button>
                   </div>
                   <div className="p-6 space-y-6">
+                    {prices.length > 0 && buyObject != null && (
+                      <div className="text-center">
+                        <span className="font-semibold">
+                          Precio total:{" "}
+                          {prices[0].amount * buyObject.seats.length + "€"}
+                        </span>
+                      </div>
+                    )}
                     <ul className="divide-y divide-gray-200 dark:divide-gray-700">
                       {user?.card_list.map((card) => (
                         <li key={card.id} className="py-4">

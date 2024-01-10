@@ -7,14 +7,16 @@ import Loading from "../Loading";
 import { formatHour, formatHumanDay, truncDay } from "../../utils/DateUtils";
 import SessionRoomModal from "./SessionRoomModal";
 import { Session } from "../../api/SessionAPI";
+import { Price } from "../../api/PriceAPI";
 
 interface Props {
   show: boolean;
   onClose: () => void;
   onOpen: () => void;
   movie: Movie;
+  prices: Price[];
 }
-function SessionsModal({ show, onClose, onOpen, movie }: Props) {
+function SessionsModal({ show, onClose, onOpen, movie, prices }: Props) {
   const [datesByDay, setDatesByDay] = useState<string[]>([]);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedSession, setSelectedSession] = useState<Session | null>(null);
@@ -182,6 +184,7 @@ function SessionsModal({ show, onClose, onOpen, movie }: Props) {
         }}
         sessionId={selectedSession?.id ?? null}
         sessionDate={selectedSession?.datetime ?? null}
+        prices={prices}
       />
     </>
   );

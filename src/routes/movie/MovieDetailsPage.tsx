@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import MovieAPI, { Movie } from "../../api/MovieAPI";
 import { BuyObject } from "../../api/PaymentAPI";
+import PriceAPI, { Price } from "../../api/PriceAPI";
 import CastSlide from "../../components/client/CastSlide";
 import Container from "../../components/client/Container";
 import ImageHeader from "../../components/client/ImageHeader";
@@ -32,6 +33,7 @@ const MovieDetailsPage = () => {
   const [showSessionsModal, setShowSessionsModal] = useState(false);
   const [showPayModal, setShowPayModal] = useState(false);
   const [buyObject, setBuyObject] = useState<BuyObject | null>(null);
+  const [prices, setPrices] = useState<Price[]>([]);
 
   const { user } = useUser();
 
@@ -81,6 +83,19 @@ const MovieDetailsPage = () => {
       setShowPayModal(true);
     }
   }, [searchParams, user]);
+
+  useEffect(() => {
+    PriceAPI.getPrices()
+      .then((res) => {
+        setPrices(res);
+      })
+      .catch(() => {
+        publish(
+          "showApiErrorMessage",
+          "No se ha podido cargar los precios. Por favor, inténtalo de nuevo en unos minutos."
+        );
+      });
+  }, []);
 
   return !movie ? (
     <></>
@@ -228,12 +243,14 @@ const MovieDetailsPage = () => {
         onClose={() => setShowSessionsModal(false)}
         onOpen={() => setShowSessionsModal(true)}
         movie={movie}
+        prices={prices}
       />
       <PayModal
         show={buyObject != null && user != null && showPayModal}
         onClose={() => setShowPayModal(false)}
         onOpen={() => setShowPayModal(true)}
         buyObject={buyObject}
+        prices={prices}
       />
     </>
   );
