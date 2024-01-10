@@ -1,3 +1,27 @@
+export const diasSemana = [
+  "Domingo",
+  "Lunes",
+  "Martes",
+  "Miércoles",
+  "Jueves",
+  "Viernes",
+  "Sábado",
+];
+
+export const meses = [
+  "enero",
+  "febrero",
+  "marzo",
+  "abril",
+  "mayo",
+  "junio",
+  "julio",
+  "agosto",
+  "septiembre",
+  "noviembre",
+  "diciembre",
+];
+
 function formatDate(date: Date): string {
   const hoursMinutes = formatHour(date);
   const formattedDate = `${date.getDate()}/${
@@ -25,4 +49,21 @@ function formatCardExpirationDate(date: Date): string {
   return formattedDate;
 }
 
-export { formatDate, formatHour, formatCardExpirationDate };
+function formatHumanDay(date: Date): string {
+  const formattedDate = `${diasSemana[date.getDay()]}, ${date.getDate()} de ${
+    meses[date.getMonth()]
+  }`;
+  return formattedDate;
+}
+
+function truncDay(date: Date): string {
+  return date.toISOString().split("T")[0];
+}
+
+export {
+  formatDate,
+  formatHour,
+  formatCardExpirationDate,
+  formatHumanDay,
+  truncDay,
+};
