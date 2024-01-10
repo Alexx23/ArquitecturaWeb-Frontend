@@ -117,11 +117,11 @@ function CardForm({ onSubmit }: Props) {
                 required: "Mes necesario",
                 min: {
                   value: 1,
-                  message: "Mes necesario",
+                  message: "Mes debe ser mayor o igual a 1",
                 },
                 max: {
                   value: 12,
-                  message: "Mes necesario",
+                  message: "Mes debe ser menor o igual a 12",
                 },
               })}
             />
@@ -143,11 +143,11 @@ function CardForm({ onSubmit }: Props) {
                 required: "Año necesario",
                 min: {
                   value: 0,
-                  message: "Año necesario",
+                  message: "Año debe ser mayor o igual a 0",
                 },
                 max: {
                   value: 99,
-                  message: "Año necesario",
+                  message: "Año debe ser menor o igual a 99",
                 },
               })}
             />
