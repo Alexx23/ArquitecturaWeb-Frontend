@@ -28,10 +28,7 @@ export default function UserTicketCell({ ticket }: Props) {
           </div>
         </div>
       </td>
-      <td className="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
-        {formatDate(new Date(ticket.created_at))}
-      </td>
-      <td className="max-w-sm flex items-center p-4 mr-12 space-x-6 whitespace-nowrap">
+      <td className="max-w-sm items-center p-4 mr-12 space-x-6 whitespace-nowrap">
         <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
           <div className="text-sm font-normal text-gray-500 dark:text-gray-400">
             {"Fila: "}

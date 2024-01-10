@@ -52,7 +52,7 @@ export default function UserTicketsPage() {
             <DataTable
               data={tickets}
               title={"Tickets"}
-              columns={["Película", "Sesión", "Fecha de Compra", "Butaca"]}
+              columns={["Película", "Sesión", "Butaca"]}
               actualPage={actualPageTickets}
               pageSize={pageSizeTickets}
               totalSize={totalSizeTickets}
