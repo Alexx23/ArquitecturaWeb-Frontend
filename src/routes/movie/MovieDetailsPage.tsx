@@ -2,13 +2,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { LoadingButton } from "@mui/lab";
 import { Box, Button, Chip, Divider, Stack, Typography } from "@mui/material";
 import { useEffect, useState, useRef } from "react";
-import { Link, useParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import MovieAPI, { Movie } from "../../api/MovieAPI";
+import { BuyObject } from "../../api/PaymentAPI";
 import CastSlide from "../../components/client/CastSlide";
 import Container from "../../components/client/Container";
 import ImageHeader from "../../components/client/ImageHeader";
 import MovieComment from "../../components/client/MovieComment";
 import AccountNeededModal from "../../components/modals/AccountNeededModal";
+import PayModal from "../../components/modals/PayModal";
 import SessionsModal from "../../components/modals/SessionsModal";
 import uiConfigs from "../../configs/ui.configs";
 import { useUser } from "../../context/UserContext";
@@ -18,10 +25,13 @@ import { getImageUrl } from "../../utils/RandomImage";
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
 
+  const [searchParams] = useSearchParams();
+
   const [movie, setMovie] = useState<Movie | null>();
   const [isLoading, setIsLoading] = useState(true);
-  const [showAccountNeededModal, setShowAccountNeededModal] = useState(false);
   const [showSessionsModal, setShowSessionsModal] = useState(false);
+  const [showPayModal, setShowPayModal] = useState(false);
+  const [buyObject, setBuyObject] = useState<BuyObject | null>(null);
 
   const { user } = useUser();
 
@@ -61,6 +71,16 @@ const MovieDetailsPage = () => {
         setIsLoading(false);
       });
   }, [movieId]);
+
+  useEffect(() => {
+    if (searchParams.get("buy") != null && user) {
+      const base64 = searchParams.get("buy");
+      if (base64 == null) return;
+      const buyObject: BuyObject = JSON.parse(atob(base64));
+      setBuyObject(buyObject);
+      setShowPayModal(true);
+    }
+  }, [searchParams, user]);
 
   return !movie ? (
     <></>
@@ -194,16 +214,17 @@ const MovieDetailsPage = () => {
           )}
         </div>
       </Box>
-      <AccountNeededModal
-        show={showAccountNeededModal}
-        onClose={() => setShowAccountNeededModal(false)}
-        content={"Necesitas iniciar sesión para comprar una entrada"}
-      />
       <SessionsModal
         show={showSessionsModal}
         onClose={() => setShowSessionsModal(false)}
         onOpen={() => setShowSessionsModal(true)}
         movie={movie}
+      />
+      <PayModal
+        show={buyObject != null && user != null && showPayModal}
+        onClose={() => setShowPayModal(false)}
+        onOpen={() => setShowPayModal(true)}
+        buyObject={buyObject}
       />
     </>
   );

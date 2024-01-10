@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import AuthAPI, { LoginRequest } from "../../api/AuthAPI";
 import Loading from "../../components/Loading";
 import RequestPasswordModal from "../../components/modals/RequestPasswordModal";
@@ -16,6 +16,7 @@ function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showRequestPasswordModal, setShowRequestPasswordModal] =
     useState(false);
+  const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
 
   const {
     register,
@@ -23,6 +24,7 @@ function LoginPage() {
     formState: { errors },
   } = useForm<LoginRequest>();
 
+  const [searchParams] = useSearchParams();
   const user = useUser();
 
   const submitForm = (data: LoginRequest) => {
@@ -33,7 +35,9 @@ function LoginPage() {
     })
       .then((res) => {
         user.setUser?.(res);
-        if (res.role.id == RoleEnum.ADMIN) {
+        if (redirectUrl) {
+          window.location.href = redirectUrl;
+        } else if (res.role.id == RoleEnum.ADMIN) {
           window.location.href = "/admin";
         } else if (res.role.id == RoleEnum.CLIENT) {
           navigate("/movies");
@@ -46,6 +50,15 @@ function LoginPage() {
         setIsLoading(false);
       });
   };
+
+  useEffect(() => {
+    if (
+      searchParams.get("redirect") != null &&
+      searchParams.get("redirect") != ""
+    ) {
+      setRedirectUrl(searchParams.get("redirect"));
+    }
+  }, [searchParams]);
 
   return (
     <>

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import AuthAPI, { RegisterRequest } from "../../api/AuthAPI";
 import Loading from "../../components/Loading";
 import ApiErrorModal from "../../components/modals/ApiErrorModal";
@@ -12,7 +12,9 @@ function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [redirectUrl, setRedirectUrl] = useState<string | null>(null);
 
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -20,6 +22,7 @@ function RegisterPage() {
     watch,
   } = useForm<RegisterRequest>();
 
+  const [searchParams] = useSearchParams();
   const password = watch("password", "");
 
   const submitForm = (data: RegisterRequest) => {
@@ -40,6 +43,11 @@ function RegisterPage() {
     })
       .then((res) => {
         publish("showSuccessMessage", "¡Has sido registrado correctamente!");
+        if (redirectUrl) {
+          navigate("/login?redirect=" + redirectUrl);
+        } else {
+          navigate("/login");
+        }
       })
       .catch((err) => {
         publish("showApiErrorMessage", err);
@@ -49,6 +57,15 @@ function RegisterPage() {
         setIsLoading(false);
       });
   };
+
+  useEffect(() => {
+    if (
+      searchParams.get("redirect") != null &&
+      searchParams.get("redirect") != ""
+    ) {
+      setRedirectUrl(searchParams.get("redirect"));
+    }
+  }, [searchParams]);
 
   return (
     <>

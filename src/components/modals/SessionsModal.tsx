@@ -176,6 +176,10 @@ function SessionsModal({ show, onClose, onOpen, movie }: Props) {
       <SessionRoomModal
         show={selectedSession != null}
         onClose={handleCloseSelectSession}
+        onCloseAll={() => {
+          setSelectedSession(null);
+          onClose();
+        }}
         sessionId={selectedSession?.id ?? null}
         sessionDate={selectedSession?.datetime ?? null}
       />
