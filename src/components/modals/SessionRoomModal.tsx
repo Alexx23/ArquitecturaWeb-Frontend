@@ -208,10 +208,15 @@ function SessionRoomModal({
                     </div>
                     {prices.length > 0 && (
                       <div className="flex items-start justify-between mt-1">
-                        <span>Precio por butaca: {prices[0].amount + "€"}</span>
+                        <span>
+                          Precio por butaca:{" "}
+                          {Number(prices[0].amount).toFixed(2) + "€"}
+                        </span>
                         <span className="font-semibold mx-3">
                           Precio total:{" "}
-                          {prices[0].amount * selectedSeats.length + "€"}
+                          {Number(
+                            prices[0].amount * selectedSeats.length
+                          ).toFixed(2) + "€"}
                         </span>
                       </div>
                     )}

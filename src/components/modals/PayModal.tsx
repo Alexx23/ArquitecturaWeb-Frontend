@@ -35,6 +35,7 @@ function PayModal({ show, onClose, onOpen, buyObject, prices }: Props) {
       .then((res) => {
         publish("showSuccessMessage", "Tickets comprados correctamente");
         onClose();
+        navigate("/tickets");
       })
       .catch((err) => {
         publish("showApiErrorMessage", err);
@@ -118,7 +119,9 @@ function PayModal({ show, onClose, onOpen, buyObject, prices }: Props) {
                       <div className="text-center">
                         <span className="font-semibold">
                           Precio total:{" "}
-                          {prices[0].amount * buyObject.seats.length + "€"}
+                          {Number(
+                            prices[0].amount * buyObject.seats.length
+                          ).toFixed(2) + "€"}
                         </span>
                       </div>
                     )}
