@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 import {
   Link,
   useLocation,
+  useNavigate,
   useParams,
   useSearchParams,
 } from "react-router-dom";
@@ -35,6 +36,7 @@ const MovieDetailsPage = () => {
   const [buyObject, setBuyObject] = useState<BuyObject | null>(null);
   const [prices, setPrices] = useState<Price[]>([]);
 
+  const navigate = useNavigate();
   const { user } = useUser();
 
   const getChipColorClass = (ageClassificationid: number) => {
@@ -58,7 +60,11 @@ const MovieDetailsPage = () => {
 
   useEffect(() => {
     if (!movieId) return;
-    if (!Number(movieId)) return;
+    if (!Number(movieId)) {
+      publish("showApiErrorMessage", "La película solicitada no existe.");
+      navigate("/movies");
+      return;
+    }
     MovieAPI.getMovie(Number(movieId))
       .then((res) => {
         setMovie(res);
@@ -68,6 +74,7 @@ const MovieDetailsPage = () => {
           "showApiErrorMessage",
           "No se ha podido cargar la película. Por favor, inténtalo de nuevo en unos minutos."
         );
+        navigate("/movies");
       })
       .finally(() => {
         setIsLoading(false);

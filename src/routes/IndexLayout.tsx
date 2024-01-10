@@ -14,6 +14,7 @@ import MoviesLayout from "./MoviesLayout";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import themeConfigs from "../configs/theme.config";
+import Error404 from "./errors/Error404";
 
 function IndexLayout() {
   const [darkMode, setDarkMode] = useState(false);
@@ -108,6 +109,7 @@ function IndexLayout() {
                     </>
                   }
                 />
+                <Route path="*" element={<Error404 />} />
               </Routes>
             </main>
           </div>

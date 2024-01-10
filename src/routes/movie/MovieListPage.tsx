@@ -18,7 +18,7 @@ const MovieListPage = () => {
     <>
       <div className="py-8 text-center">
         <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
-          Buscador de películas
+          Buscador de películas en cartelera
         </h1>
         <input
           value={inputName}
