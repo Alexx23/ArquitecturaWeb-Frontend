@@ -23,8 +23,8 @@ function RoomForm({ room, onSubmit }: Props) {
       ? {
           defaultValues: {
             name: room.name,
-            files: room.files,
-            cols: room.cols,
+            depth: room.depth,
+            seats: room.seats,
           },
         }
       : {}
@@ -58,13 +58,13 @@ function RoomForm({ room, onSubmit }: Props) {
           </div>
           <div className="col-span-6 sm:col-span-3">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Filas
+              Profundidad
             </label>
             <input
               type="number"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               required
-              {...register("files", {
+              {...register("depth", {
                 required: "Año necesario",
                 min: {
                   value: 1,
@@ -72,21 +72,21 @@ function RoomForm({ room, onSubmit }: Props) {
                 },
               })}
             />
-            {errors.files && (
+            {errors.depth && (
               <p className="pt-2 text-red-500 text-base italic">
-                {errors.files.message + ""}
+                {errors.depth.message + ""}
               </p>
             )}
           </div>
           <div className="col-span-6 sm:col-span-3">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-              Columnas
+              Asientos por fila
             </label>
             <input
               type="number"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               required
-              {...register("cols", {
+              {...register("seats", {
                 required: "Duración necesaria",
                 min: {
                   value: 1,
@@ -94,9 +94,9 @@ function RoomForm({ room, onSubmit }: Props) {
                 },
               })}
             />
-            {errors.cols && (
+            {errors.seats && (
               <p className="pt-2 text-red-500 text-base italic">
-                {errors.cols.message + ""}
+                {errors.seats.message + ""}
               </p>
             )}
           </div>

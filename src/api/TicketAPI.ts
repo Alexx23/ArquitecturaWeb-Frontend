@@ -11,19 +11,31 @@ export interface Ticket {
   id: number;
   session: Session;
   user: User;
-  row: number;
-  col: number;
+  depth: number;
+  seat: number;
   created_at: Date;
 }
 
 export interface TicketCreate {
-  session: Session;
-  user: User;
-  row: number;
-  col: number;
+  depth: number;
+  seat: number;
 }
 
 export default class TicketAPI {
+  public static crearObjetoTickets = (
+    listaTickets: TicketCreate[]
+  ): { [posicion: string]: TicketCreate } => {
+    const objetoTickets: { [posicion: string]: TicketCreate } = {};
+
+    // Recorrer la lista de tickets y agregar al objeto por posición
+    listaTickets.forEach((ticket, index) => {
+      const posicion = `${ticket.depth}-${ticket.seat}`;
+      objetoTickets[posicion] = ticket;
+    });
+
+    return objetoTickets;
+  };
+
   public static async getTickets(
     page: number,
     name?: string | null
@@ -39,11 +51,14 @@ export default class TicketAPI {
     return getMethod<Ticket>("/ticket/" + id);
   }
 
-  public static async createTicket(ticket: TicketCreate): Promise<Ticket> {
-    return postMethod<Ticket>("/ticket", ticket);
-  }
-
-  public static async deleteTicket(id: number): Promise<unknown> {
-    return deleteMethod<unknown>("/ticket/" + id);
+  public static async createTickets(
+    sessionId: number,
+    tickets: TicketCreate[]
+  ): Promise<unknown> {
+    const object: { [index: number]: string } = {};
+    tickets.forEach((ticket, index) => {
+      object[index] = `${ticket.depth}:${ticket.seat}`;
+    });
+    return postMethod<Ticket>("/session/" + sessionId + "/ticket", object);
   }
 }

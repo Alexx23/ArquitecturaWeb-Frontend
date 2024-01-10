@@ -68,7 +68,7 @@ function RoomsPage() {
       <DataTable
         data={rooms}
         title={"Salas"}
-        columns={["Nombre", "Filas", "Columnas"]}
+        columns={["Nombre", "Profundidad", "Asientos por fila"]}
         actualPage={actualPage}
         pageSize={pageSize}
         totalSize={totalSize}

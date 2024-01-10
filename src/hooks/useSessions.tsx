@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import SessionAPI, { Session } from "../api/SessionAPI";
 import { publish } from "../utils/CustomEvents";
 
-function useSessions(date: Date, movieId?: number) {
+function useSessions(value: Date | number) {
   const [sessions, setSessions] = useState<Session[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -10,7 +10,7 @@ function useSessions(date: Date, movieId?: number) {
     if (isLoading) return;
     setIsLoading(true);
 
-    SessionAPI.getSessions(date, movieId ? movieId : null)
+    SessionAPI.getSessions(value)
       .then((res) => {
         setSessions(res);
       })

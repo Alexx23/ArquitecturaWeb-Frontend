@@ -8,6 +8,8 @@ import CastSlide from "../../components/client/CastSlide";
 import Container from "../../components/client/Container";
 import ImageHeader from "../../components/client/ImageHeader";
 import MovieComment from "../../components/client/MovieComment";
+import AccountNeededModal from "../../components/modals/AccountNeededModal";
+import SessionsModal from "../../components/modals/SessionsModal";
 import uiConfigs from "../../configs/ui.configs";
 import { useUser } from "../../context/UserContext";
 import { publish } from "../../utils/CustomEvents";
@@ -18,6 +20,8 @@ const MovieDetailsPage = () => {
 
   const [movie, setMovie] = useState<Movie | null>();
   const [isLoading, setIsLoading] = useState(true);
+  const [showAccountNeededModal, setShowAccountNeededModal] = useState(false);
+  const [showSessionsModal, setShowSessionsModal] = useState(false);
 
   const { user } = useUser();
 
@@ -125,7 +129,10 @@ const MovieDetailsPage = () => {
                 >
                   {movie.original_title}
                 </span>
-                <button className="max-w-[15rem] z-[5] text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-3 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                <button
+                  onClick={() => setShowSessionsModal(true)}
+                  className="max-w-[15rem] z-[5] text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-3 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                >
                   <FontAwesomeIcon icon="cart-shopping" className="mr-2" />
                   COMPRAR ENTRADAS
                 </button>
@@ -187,6 +194,17 @@ const MovieDetailsPage = () => {
           )}
         </div>
       </Box>
+      <AccountNeededModal
+        show={showAccountNeededModal}
+        onClose={() => setShowAccountNeededModal(false)}
+        content={"Necesitas iniciar sesión para comprar una entrada"}
+      />
+      <SessionsModal
+        show={showSessionsModal}
+        onClose={() => setShowSessionsModal(false)}
+        onOpen={() => setShowSessionsModal(true)}
+        movie={movie}
+      />
     </>
   );
 };

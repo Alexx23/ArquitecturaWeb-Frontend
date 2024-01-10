@@ -10,8 +10,8 @@ import { publish } from "../../utils/CustomEvents";
 
 function RegisterPage() {
   const [isLoading, setIsLoading] = useState(false);
-
   const [showPassword, setShowPassword] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const {
     register,
@@ -23,6 +23,13 @@ function RegisterPage() {
   const password = watch("password", "");
 
   const submitForm = (data: RegisterRequest) => {
+    if (!termsAccepted) {
+      publish(
+        "showApiErrorMessage",
+        "Debes aceptar los Términos y Condiciones de uso"
+      );
+      return;
+    }
     setIsLoading(true);
     AuthAPI.register({
       name: data.name,
@@ -192,6 +199,7 @@ function RegisterPage() {
             <div className="flex items-start">
               <div className="flex items-center h-5">
                 <input
+                  onClick={() => setTermsAccepted(!termsAccepted)}
                   aria-describedby="remember"
                   type="checkbox"
                   className="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:focus:ring-primary-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600"

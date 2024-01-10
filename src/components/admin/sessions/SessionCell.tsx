@@ -25,7 +25,7 @@ export default function SessionCell({ session }: Props) {
         {session.ticket_list.length}
       </td>
       <td className="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
-        {session.room.cols * session.room.files}
+        {session.room.depth * session.room.seats}
       </td>
     </>
   );

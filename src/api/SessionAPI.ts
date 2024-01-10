@@ -24,15 +24,12 @@ export interface SessionUpdate {
 }
 
 export default class SessionAPI {
-  public static async getSessions(
-    date: Date,
-    movieId?: number | null
-  ): Promise<Session[]> {
-    let url = "/session?date=" + date.toISOString();
-    if (movieId) {
-      url += "&movie_id=" + movieId;
+  public static async getSessions(value: Date | number): Promise<Session[]> {
+    // Si value es Date filtra por fecha, si value es number filtra por id de pelicula
+    if (value instanceof Date) {
+      return getMethod<Session[]>("/session?date=" + value.toISOString());
     }
-    return getMethod<Session[]>(url);
+    return getMethod<Session[]>("/session?movie_id=" + value);
   }
 
   public static async getSession(id: number): Promise<Session> {

@@ -34,8 +34,8 @@ function TicketsPage() {
           "Película",
           "Sesión",
           "Fecha de Compra",
-          "Fila",
-          "Columna",
+          "Profundidad",
+          "Asiento de fila",
         ]}
         actualPage={actualPage}
         pageSize={pageSize}

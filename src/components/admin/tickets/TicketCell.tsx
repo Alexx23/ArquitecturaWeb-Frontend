@@ -42,10 +42,10 @@ export default function TicketCell({ ticket }: Props) {
         {formatDate(new Date(ticket.created_at))}
       </td>
       <td className="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
-        {ticket.row}
+        {ticket.depth}
       </td>
       <td className="max-w-sm p-4 overflow-hidden text-base font-normal text-gray-500 truncate xl:max-w-xs dark:text-gray-400">
-        {ticket.col}
+        {ticket.seat}
       </td>
     </>
   );

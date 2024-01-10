@@ -3,20 +3,20 @@ import { Paginated, deleteMethod, getMethod, postMethod, putMethod } from ".";
 export interface Room {
   id: number;
   name: string;
-  files: number;
-  cols: number;
+  depth: number;
+  seats: number;
 }
 
 export interface RoomCreate {
   name: string;
-  files: number;
-  cols: number;
+  depth: number;
+  seats: number;
 }
 
 export interface RoomUpdate {
   name?: string;
-  files?: number;
-  cols?: number;
+  depth?: number;
+  seats?: number;
 }
 
 export default class RoomAPI {
