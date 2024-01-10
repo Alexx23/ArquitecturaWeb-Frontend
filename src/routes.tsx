@@ -8,7 +8,7 @@ import ErrorBoundary from "./routes/errors/ErrorBoundary";
 import RequireAuth from "./utils/RequireAuth";
 import RoleEnum from "./utils/RoleEnum";
 import ClientMoviesPage from "./routes/MoviesLayout";
-import ProfilePage from "./routes/index/ProfilePage";
+import ProfilePage from "./routes/index/UserProfilePage";
 import TermsConditions from "./routes/index/TermsConditionsPage";
 import PrivacyPolicy from "./routes/index/PrivacyPolicyPage";
 import IndexLayout from "./routes/IndexLayout";

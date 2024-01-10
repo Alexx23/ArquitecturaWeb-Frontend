@@ -15,7 +15,7 @@ import { useUser } from "../../context/UserContext";
 import { publish } from "../../utils/CustomEvents";
 import { formatCardExpirationDate } from "../../utils/DateUtils";
 
-export default function ProfilePage() {
+export default function UserProfilePage() {
   const [isUpdating, setIsUpdating] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
   const [isDeletingCard, setIsDeletingCard] = useState(false);

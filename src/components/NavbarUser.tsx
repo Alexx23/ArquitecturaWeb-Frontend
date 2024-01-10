@@ -93,6 +93,12 @@ export default function NavbarUser() {
             </ListItemIcon>
             Perfil
           </MenuItem>
+          <MenuItem onClick={() => navigate("/tickets")}>
+            <ListItemIcon>
+              <FontAwesomeIcon icon={"ticket"} className="w-4 h-4" />
+            </ListItemIcon>
+            Mis tickets
+          </MenuItem>
           <MenuItem onClick={() => logout?.()}>
             <ListItemIcon>
               <FontAwesomeIcon

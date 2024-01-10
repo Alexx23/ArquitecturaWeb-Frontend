@@ -9,12 +9,13 @@ import TermsConditionsPage from "./index/TermsConditionsPage";
 import PrivacyPolicyPage from "./index/PrivacyPolicyPage";
 import RequireAuth from "../utils/RequireAuth";
 import RoleEnum from "../utils/RoleEnum";
-import ProfilePage from "./index/ProfilePage";
+import UserProfilePage from "./index/UserProfilePage";
 import MoviesLayout from "./MoviesLayout";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import themeConfigs from "../configs/theme.config";
 import Error404 from "./errors/Error404";
+import UserTicketsPage from "./index/UserTicketsPage";
 
 function IndexLayout() {
   const [darkMode, setDarkMode] = useState(false);
@@ -105,7 +106,18 @@ function IndexLayout() {
                       <RequireAuth
                         allowedRoles={[RoleEnum.CLIENT, RoleEnum.ADMIN]}
                       />
-                      <ProfilePage />
+                      <UserProfilePage />
+                    </>
+                  }
+                />
+                <Route
+                  path="/tickets"
+                  element={
+                    <>
+                      <RequireAuth
+                        allowedRoles={[RoleEnum.CLIENT, RoleEnum.ADMIN]}
+                      />
+                      <UserTicketsPage />
                     </>
                   }
                 />

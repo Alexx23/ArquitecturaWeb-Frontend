@@ -1,5 +1,6 @@
 import { getMethod, Paginated, postMethod, putMethod } from ".";
 import { Card } from "./CardAPI";
+import { Payment } from "./PaymentAPI";
 import { Ticket } from "./TicketAPI";
 
 export interface User {
@@ -51,6 +52,14 @@ export default class UserAPI {
       url = "/usersession";
     }
     return getMethod<User>(url);
+  }
+
+  public static async getTickets(page: number): Promise<Paginated<Ticket>> {
+    return getMethod<Paginated<Ticket>>("/usersession/ticket?page=" + page);
+  }
+
+  public static async getPayments(page: number): Promise<Paginated<Payment>> {
+    return getMethod<Paginated<Payment>>("/usersession/payment?page=" + page);
   }
 
   public static async changePassword(

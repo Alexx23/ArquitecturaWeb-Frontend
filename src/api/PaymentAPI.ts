@@ -8,6 +8,15 @@ import { Session } from "./SessionAPI";
 import { TicketSeat } from "./TicketAPI";
 import { User } from "./UserAPI";
 
+export interface Payment {
+  reference: string;
+  amount: number;
+  card_title: string;
+  card_number: number;
+  user: User;
+  created_at: Date;
+}
+
 export interface PaymentCreate extends BuyObject {
   card_id: number;
 }
@@ -17,7 +26,18 @@ export interface BuyObject {
   seats: TicketSeat[];
 }
 
-export default class TicketAPI {
+export default class PaymentAPI {
+  public static async getPayments(
+    page: number,
+    name?: string | null
+  ): Promise<Paginated<Payment>> {
+    let url = "/ticket?page=" + page;
+    if (name) {
+      url += "&name=" + name;
+    }
+    return getMethod<Paginated<Payment>>(url);
+  }
+
   public static async createPayment(
     paymentRequest: PaymentCreate
   ): Promise<unknown> {

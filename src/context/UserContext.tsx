@@ -6,7 +6,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AuthAPI from "../api/AuthAPI";
 import UserAPI, { User } from "../api/UserAPI";
 import RoleEnum from "../utils/RoleEnum";
@@ -24,6 +24,9 @@ const UserContext = createContext<UserContextInterface>({
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
+  const { pathname } = useLocation();
+
+  const loggedUserPaths = ["profile", "tickets"];
 
   const logout = () => {
     AuthAPI.logout()
@@ -31,7 +34,12 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
         /* */
       })
       .finally(() => {
+        // Si es admin
         if (user?.role.id == RoleEnum.ADMIN) {
+          window.location.href = "/login";
+        }
+        // Si está en una ruta de usuario logueado
+        if (loggedUserPaths.some((path) => pathname.includes(path))) {
           window.location.href = "/login";
         }
         setUser(null);

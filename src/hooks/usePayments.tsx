@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { Paginated } from "../api";
-import TicketAPI, { Ticket } from "../api/TicketAPI";
+import PaymentAPI, { Payment } from "../api/PaymentAPI";
 import UserAPI from "../api/UserAPI";
 import { publish } from "../utils/CustomEvents";
 
-function useTickets(inputName: string, sessionMode: boolean = false) {
-  const [tickets, setTickets] = useState<Ticket[]>([]);
+function usePayments(inputName: string, sessionMode: boolean = false) {
+  const [payments, setPayments] = useState<Payment[]>([]);
   const [actualPage, setActualPage] = useState(0);
   const [nextPage, setNextPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -13,16 +13,16 @@ function useTickets(inputName: string, sessionMode: boolean = false) {
   const [totalSize, setTotalSize] = useState(0);
   const [inputChanged, setInputChanged] = useState(false);
 
-  const requestTickets = (pageToRequest: number) => {
+  const requestPayments = (pageToRequest: number) => {
     if (isLoading && pageToRequest != 1) return;
     if (pageToRequest <= 0) return;
     setIsLoading(true);
 
-    let promise: Promise<Paginated<Ticket>>;
+    let promise: Promise<Paginated<Payment>>;
     if (sessionMode) {
-      promise = UserAPI.getTickets(pageToRequest);
+      promise = UserAPI.getPayments(pageToRequest);
     } else {
-      promise = TicketAPI.getTickets(
+      promise = PaymentAPI.getPayments(
         pageToRequest,
         inputName.length ? inputName : null
       );
@@ -30,7 +30,7 @@ function useTickets(inputName: string, sessionMode: boolean = false) {
 
     promise
       .then((res) => {
-        setTickets(res.data);
+        setPayments(res.data);
         setActualPage(res.actual_page);
         setNextPage(res.has_more ? res.actual_page + 1 : -1);
         setPageSize(res.page_size);
@@ -39,7 +39,7 @@ function useTickets(inputName: string, sessionMode: boolean = false) {
       .catch((err) => {
         publish(
           "showApiErrorMessage",
-          "No se ha podido cargar la lista de tickets correctamente. Por favor, inténtalo de nuevo en unos minutos."
+          "No se ha podido cargar la lista de payments correctamente. Por favor, inténtalo de nuevo en unos minutos."
         );
       })
       .finally(() => {
@@ -51,23 +51,23 @@ function useTickets(inputName: string, sessionMode: boolean = false) {
     if (!inputChanged) return;
     setIsLoading(true);
     const timer = setTimeout(() => {
-      requestTickets(1);
+      requestPayments(1);
     }, 800);
     return () => clearTimeout(timer);
   }, [inputChanged, inputName]);
 
   return {
-    tickets,
+    payments,
     isLoading,
     actualPage,
     nextPage,
     pageSize,
     totalSize,
     setInputChanged,
-    fetchNext: () => requestTickets(nextPage),
-    fetchCurrent: () => requestTickets(actualPage),
-    fetchPrevious: () => requestTickets(actualPage - 1),
+    fetchNext: () => requestPayments(nextPage),
+    fetchCurrent: () => requestPayments(actualPage),
+    fetchPrevious: () => requestPayments(actualPage - 1),
   };
 }
 
-export default useTickets;
+export default usePayments;
