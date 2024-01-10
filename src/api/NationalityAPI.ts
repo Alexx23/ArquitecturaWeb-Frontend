@@ -1,4 +1,4 @@
-import { Paginated, deleteMethod, getMethod, postMethod, putMethod } from ".";
+import { deleteMethod, getMethod, Paginated, postMethod, putMethod } from ".";
 
 export interface Nationality {
   id: number;

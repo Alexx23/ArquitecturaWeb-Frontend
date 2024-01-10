@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import TicketAPI, { Ticket } from "../../api/TicketAPI";
+import { Ticket } from "../../api/TicketAPI";
 import DataTable from "../../components/admin/DataTable";
-import DeleteModal from "../../components/modals/DeleteModal";
 import TicketCell from "../../components/admin/tickets/TicketCell";
 import useTickets from "../../hooks/useTickets";
-import { publish } from "../../utils/CustomEvents";
 
 function TicketsPage() {
   const [inputName, setInputName] = useState("");

@@ -1,26 +1,15 @@
-import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useMemo } from "react";
-import { Movie } from "../../api/MovieAPI";
-import { useState } from "react";
-import useSessions from "../../hooks/useSessions";
-import Loading from "../Loading";
-import {
-  formatCardExpirationDate,
-  formatHour,
-  formatHumanDay,
-  truncDay,
-} from "../../utils/DateUtils";
-import SessionRoomModal from "./SessionRoomModal";
-import { Session } from "../../api/SessionAPI";
-import { useUser } from "../../context/UserContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import UpdateModal from "./UpdateModal";
-import CardForm from "../client/CardForm";
-import CardAPI, { Card, CardCreate } from "../../api/CardAPI";
-import { publish } from "../../utils/CustomEvents";
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CardAPI, { Card, CardCreate } from "../../api/CardAPI";
 import PaymentAPI, { BuyObject, PaymentCreate } from "../../api/PaymentAPI";
 import { Price } from "../../api/PriceAPI";
+import { useUser } from "../../context/UserContext";
+import { publish } from "../../utils/CustomEvents";
+import { formatCardExpirationDate } from "../../utils/DateUtils";
+import CardForm from "../client/CardForm";
+import UpdateModal from "./UpdateModal";
 
 interface Props {
   show: boolean;

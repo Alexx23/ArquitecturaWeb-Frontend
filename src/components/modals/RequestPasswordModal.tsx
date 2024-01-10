@@ -1,6 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { FieldValues, useForm, UseFormRegister } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import RequestPasswordAPI, {
   RequestPasswordRequest,
 } from "../../api/RequestPasswordAPI";

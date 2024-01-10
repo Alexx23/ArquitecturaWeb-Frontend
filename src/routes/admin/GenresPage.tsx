@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import GenreAPI, { Genre, GenreCreate } from "../../api/GenreAPI";
 import DataTable from "../../components/admin/DataTable";
-import DeleteModal from "../../components/modals/DeleteModal";
 import GenreCell from "../../components/admin/genres/GenreCell";
 import GenreForm from "../../components/admin/genres/GenreForm";
+import DeleteModal from "../../components/modals/DeleteModal";
 import UpdateModal from "../../components/modals/UpdateModal";
 import useGenres from "../../hooks/useGenres";
 import { publish } from "../../utils/CustomEvents";

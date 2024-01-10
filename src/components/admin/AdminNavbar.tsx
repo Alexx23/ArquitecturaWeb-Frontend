@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useUser } from "../../context/UserContext";
 import NavbarUser from "../NavbarUser";
 
 interface Props {

@@ -4,8 +4,6 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import AuthAPI, { RegisterRequest } from "../../api/AuthAPI";
 import Loading from "../../components/Loading";
-import ApiErrorModal from "../../components/modals/ApiErrorModal";
-import SuccessModal from "../../components/modals/SuccessModal";
 import { publish } from "../../utils/CustomEvents";
 
 function RegisterPage() {

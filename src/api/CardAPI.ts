@@ -1,4 +1,4 @@
-import { deleteMethod, getMethod, Paginated, postMethod, putMethod } from ".";
+import { deleteMethod, postMethod } from ".";
 import { User } from "./UserAPI";
 
 export interface Card {

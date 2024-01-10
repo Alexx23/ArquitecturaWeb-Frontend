@@ -1,10 +1,7 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment } from "react";
 import QRCode from "react-qr-code";
-import { useNavigate } from "react-router-dom";
 import { Ticket } from "../../api/TicketAPI";
-import { subscribe, unsubscribe } from "../../utils/CustomEvents";
 import Loading from "../Loading";
 
 interface Props {

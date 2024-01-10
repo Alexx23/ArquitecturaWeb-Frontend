@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
-import PaymentAPI, { Payment } from "../../api/PaymentAPI";
+import { useEffect } from "react";
+import { Payment } from "../../api/PaymentAPI";
 import DataTable from "../../components/admin/DataTable";
-import DeleteModal from "../../components/modals/DeleteModal";
 import PaymentCell from "../../components/admin/payments/PaymentCell";
 import usePayments from "../../hooks/usePayments";
-import { publish } from "../../utils/CustomEvents";
 
 function AdminIndexPage() {
   const {

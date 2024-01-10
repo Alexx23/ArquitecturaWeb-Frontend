@@ -1,11 +1,5 @@
 import { useForm } from "react-hook-form";
 import { Room, RoomCreate } from "../../../api/RoomAPI";
-import useGenres from "../../../hooks/useGenres";
-import { useEffect, useState } from "react";
-import useDirectors from "../../../hooks/useDirectors";
-import useDistributors from "../../../hooks/useDistributors";
-import useNationalities from "../../../hooks/useNationalities";
-import useAgeClassifications from "../../../hooks/useAgeClassification";
 
 interface Props {
   room: Room | false | null;

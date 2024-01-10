@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import ActorAPI, { Actor, ActorCreate } from "../../api/ActorAPI";
-import DataTable from "../../components/admin/DataTable";
-import DeleteModal from "../../components/modals/DeleteModal";
 import ActorCell from "../../components/admin/actors/ActorCell";
 import ActorForm from "../../components/admin/actors/ActorForm";
+import DataTable from "../../components/admin/DataTable";
+import DeleteModal from "../../components/modals/DeleteModal";
 import UpdateModal from "../../components/modals/UpdateModal";
 import useActors from "../../hooks/useActors";
 import { publish } from "../../utils/CustomEvents";

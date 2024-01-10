@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Card, CardCreate } from "../../api/CardAPI";
-import { useEffect, useState } from "react";
+import { CardCreate } from "../../api/CardAPI";
 
 interface LocalCardCreate extends CardCreate {
   month: number;

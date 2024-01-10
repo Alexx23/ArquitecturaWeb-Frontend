@@ -1,13 +1,12 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useMemo } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { Movie } from "../../api/MovieAPI";
-import { useState } from "react";
-import useSessions from "../../hooks/useSessions";
-import Loading from "../Loading";
-import { formatHour, formatHumanDay, truncDay } from "../../utils/DateUtils";
-import SessionRoomModal from "./SessionRoomModal";
-import { Session } from "../../api/SessionAPI";
 import { Price } from "../../api/PriceAPI";
+import { Session } from "../../api/SessionAPI";
+import useSessions from "../../hooks/useSessions";
+import { formatHour, formatHumanDay, truncDay } from "../../utils/DateUtils";
+import Loading from "../Loading";
+import SessionRoomModal from "./SessionRoomModal";
 
 interface Props {
   show: boolean;

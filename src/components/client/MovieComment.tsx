@@ -1,25 +1,16 @@
-import { LoadingButton } from "@mui/lab";
-import {
-  Box,
-  Button,
-  Divider,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Box, Divider, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import Container from "./Container";
-import { Movie } from "../../api/MovieAPI";
 import CommentAPI, { Comment, CommentCreate } from "../../api/CommentAPI";
-import { formatDate } from "../../utils/DateUtils";
+import { Movie } from "../../api/MovieAPI";
 import { useUser } from "../../context/UserContext";
-import { getAvatarUrl } from "../../utils/RandomImage";
 import useComments from "../../hooks/useComments";
 import { publish } from "../../utils/CustomEvents";
+import { formatDate } from "../../utils/DateUtils";
+import { getAvatarUrl } from "../../utils/RandomImage";
 import Loading from "../Loading";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import DeleteModal from "../modals/DeleteModal";
-import { set } from "react-hook-form";
+import Container from "./Container";
 
 interface PropsItem {
   comment: Comment;

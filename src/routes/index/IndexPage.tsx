@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import AOS from "aos";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 interface Props {

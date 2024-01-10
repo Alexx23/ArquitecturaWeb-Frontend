@@ -1,15 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import CardAPI, { Card, CardCreate } from "../../api/CardAPI";
 import UserAPI, { ChangePassword, UserUpdate } from "../../api/UserAPI";
 import CardForm from "../../components/client/CardForm";
-import Navbar from "../../components/client/Navbar";
 import Loading from "../../components/Loading";
-import ApiErrorModal from "../../components/modals/ApiErrorModal";
 import DeleteModal from "../../components/modals/DeleteModal";
-import SuccessModal from "../../components/modals/SuccessModal";
 import UpdateModal from "../../components/modals/UpdateModal";
 import { useUser } from "../../context/UserContext";
 import { publish } from "../../utils/CustomEvents";

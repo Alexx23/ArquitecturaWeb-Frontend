@@ -1,27 +1,12 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ReactNode, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import CardAPI, { Card, CardCreate } from "../../api/CardAPI";
+import { useEffect, useState } from "react";
 import { Payment } from "../../api/PaymentAPI";
 import { Ticket } from "../../api/TicketAPI";
-import UserAPI, { ChangePassword, UserUpdate } from "../../api/UserAPI";
 import DataTable from "../../components/admin/DataTable";
-import CardForm from "../../components/client/CardForm";
-import Navbar from "../../components/client/Navbar";
 import UserPaymentCell from "../../components/client/UserPaymentCell";
 import UserTicketCell from "../../components/client/UserTicketCell";
-import Loading from "../../components/Loading";
-import ApiErrorModal from "../../components/modals/ApiErrorModal";
-import DeleteModal from "../../components/modals/DeleteModal";
-import SuccessModal from "../../components/modals/SuccessModal";
-import UpdateModal from "../../components/modals/UpdateModal";
 import ViewTicketModal from "../../components/modals/ViewTicketModal";
-import { useUser } from "../../context/UserContext";
 import usePayments from "../../hooks/usePayments";
 import useTickets from "../../hooks/useTickets";
-import { publish } from "../../utils/CustomEvents";
-import { formatCardExpirationDate } from "../../utils/DateUtils";
 
 export default function UserTicketsPage() {
   const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);

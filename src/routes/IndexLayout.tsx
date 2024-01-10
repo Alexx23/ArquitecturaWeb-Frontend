@@ -1,21 +1,21 @@
-import { useEffect, useMemo, useState } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
-import Footer from "../components/Footer";
-import Navbar from "../components/client/Navbar";
-import IndexPage from "./index/IndexPage";
-import LoginPage from "./index/LoginPage";
-import RegisterPage from "./index/RegisterPage";
-import TermsConditionsPage from "./index/TermsConditionsPage";
-import PrivacyPolicyPage from "./index/PrivacyPolicyPage";
-import RequireAuth from "../utils/RequireAuth";
-import RoleEnum from "../utils/RoleEnum";
-import UserProfilePage from "./index/UserProfilePage";
-import MoviesLayout from "./MoviesLayout";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
+import { useEffect, useMemo, useState } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import Navbar from "../components/client/Navbar";
+import Footer from "../components/Footer";
 import themeConfigs from "../configs/theme.config";
+import RequireAuth from "../utils/RequireAuth";
+import RoleEnum from "../utils/RoleEnum";
 import Error404 from "./errors/Error404";
+import IndexPage from "./index/IndexPage";
+import LoginPage from "./index/LoginPage";
+import PrivacyPolicyPage from "./index/PrivacyPolicyPage";
+import RegisterPage from "./index/RegisterPage";
+import TermsConditionsPage from "./index/TermsConditionsPage";
+import UserProfilePage from "./index/UserProfilePage";
 import UserTicketsPage from "./index/UserTicketsPage";
+import MoviesLayout from "./MoviesLayout";
 
 function IndexLayout() {
   const [darkMode, setDarkMode] = useState(false);

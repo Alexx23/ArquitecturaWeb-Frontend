@@ -1,18 +1,17 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useEffect, useMemo } from "react";
-import { useState } from "react";
-import SessionAPI, { Session } from "../../api/SessionAPI";
 import Tooltip from "@mui/material/Tooltip";
+import { Fragment, useEffect, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { BuyObject } from "../../api/PaymentAPI";
+import { Price } from "../../api/PriceAPI";
+import SessionAPI, { Session } from "../../api/SessionAPI";
+import { TicketSeat } from "../../api/TicketAPI";
+import { useUser } from "../../context/UserContext";
+import { publish } from "../../utils/CustomEvents";
 import { formatHour, formatHumanDay } from "../../utils/DateUtils";
 import Loading from "../Loading";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useUser } from "../../context/UserContext";
-import TicketAPI, { TicketSeat } from "../../api/TicketAPI";
-import { BuyObject } from "../../api/PaymentAPI";
-import { useLocation, useNavigate } from "react-router-dom";
 import AccountNeededModal from "./AccountNeededModal";
-import { Price } from "../../api/PriceAPI";
-import { publish } from "../../utils/CustomEvents";
 
 interface Props {
   show: boolean;

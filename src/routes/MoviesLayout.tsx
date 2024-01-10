@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import MovieListPage from "./movie/MovieListPage";
-import MovieDetailsPage from "./movie/MovieDetailsPage";
 import Error404 from "./errors/Error404";
+import MovieDetailsPage from "./movie/MovieDetailsPage";
+import MovieListPage from "./movie/MovieListPage";
 
 function MoviesLayout() {
   return (

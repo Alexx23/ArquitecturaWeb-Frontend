@@ -1,6 +1,6 @@
-import { Room } from "./RoomAPI";
 import { deleteMethod, getMethod, postMethod, putMethod } from ".";
 import { Movie } from "./MovieAPI";
+import { Room } from "./RoomAPI";
 import { Ticket } from "./TicketAPI";
 
 export interface Session {

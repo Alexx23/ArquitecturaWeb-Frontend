@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import RoomAPI, { Room, RoomCreate } from "../../api/RoomAPI";
 import DataTable from "../../components/admin/DataTable";
-import DeleteModal from "../../components/modals/DeleteModal";
 import RoomCell from "../../components/admin/rooms/RoomCell";
 import RoomForm from "../../components/admin/rooms/RoomForm";
+import DeleteModal from "../../components/modals/DeleteModal";
 import UpdateModal from "../../components/modals/UpdateModal";
 import useRooms from "../../hooks/useRooms";
 import { publish } from "../../utils/CustomEvents";

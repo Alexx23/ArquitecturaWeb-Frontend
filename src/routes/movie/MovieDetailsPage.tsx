@@ -1,10 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { LoadingButton } from "@mui/lab";
-import { Box, Button, Chip, Divider, Stack, Typography } from "@mui/material";
-import { useEffect, useState, useRef } from "react";
+import { Box, Divider, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import {
   Link,
-  useLocation,
   useNavigate,
   useParams,
   useSearchParams,
@@ -16,7 +14,6 @@ import CastSlide from "../../components/client/CastSlide";
 import Container from "../../components/client/Container";
 import ImageHeader from "../../components/client/ImageHeader";
 import MovieComment from "../../components/client/MovieComment";
-import AccountNeededModal from "../../components/modals/AccountNeededModal";
 import PayModal from "../../components/modals/PayModal";
 import SessionsModal from "../../components/modals/SessionsModal";
 import uiConfigs from "../../configs/ui.configs";

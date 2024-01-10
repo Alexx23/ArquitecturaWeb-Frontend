@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SessionAPI, { Session } from "../api/SessionAPI";
 import { publish } from "../utils/CustomEvents";
 

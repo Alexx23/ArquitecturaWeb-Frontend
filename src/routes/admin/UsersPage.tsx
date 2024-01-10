@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import UserAPI, { User } from "../../api/UserAPI";
+import { User } from "../../api/UserAPI";
 import DataTable from "../../components/admin/DataTable";
-import DeleteModal from "../../components/modals/DeleteModal";
 import UserCell from "../../components/admin/users/UserCell";
 import useUsers from "../../hooks/useUsers";
-import { publish } from "../../utils/CustomEvents";
 
 function UsersPage() {
   const [inputName, setInputName] = useState("");

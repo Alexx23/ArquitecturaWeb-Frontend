@@ -1,6 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import { FieldValues, useForm, UseFormRegister } from "react-hook-form";
 
 interface Props<T> {
   show: boolean;

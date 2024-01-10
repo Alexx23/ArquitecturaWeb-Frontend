@@ -1,8 +1,7 @@
-import { useForm } from "react-hook-form";
-import { Movie, MovieCreate } from "../../../api/MovieAPI";
-import { useEffect, useMemo, useState } from "react";
-import useActors from "../../../hooks/useActors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useMemo, useState } from "react";
+import { Movie } from "../../../api/MovieAPI";
+import useActors from "../../../hooks/useActors";
 
 interface Props {
   movie: Movie | false | null;

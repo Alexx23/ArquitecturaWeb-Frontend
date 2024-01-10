@@ -1,9 +1,4 @@
-import { Paginated, deleteMethod, getMethod, postMethod, putMethod } from ".";
-import { AgeClassification } from "./AgeClassificationAPI";
-import { Director } from "./DirectorAPI";
-import { Distributor } from "./DistributorAPI";
-import { Genre } from "./GenreAPI";
-import { Nationality } from "./NationalityAPI";
+import { getMethod, Paginated } from ".";
 import { Session } from "./SessionAPI";
 import { User } from "./UserAPI";
 

@@ -1,25 +1,23 @@
+import CssBaseline from "@mui/material/CssBaseline";
+import ThemeProvider from "@mui/material/styles/ThemeProvider";
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Footer from "../components/Footer";
 import AdminNavbar from "../components/admin/AdminNavbar";
 import AdminSidebar from "../components/admin/Sidebar";
-import ApiErrorModal from "../components/modals/ApiErrorModal";
-import SuccessModal from "../components/modals/SuccessModal";
+import Footer from "../components/Footer";
+import themeConfigs from "../configs/theme.config";
 import ActorsPage from "./admin/ActorPage";
+import AdminIndexPage from "./admin/AdminIndexPage";
 import DirectorsPage from "./admin/DirectorsPage";
 import DistributorsPage from "./admin/DistributorsPage";
 import GenresPage from "./admin/GenresPage";
 import MoviesPage from "./admin/MoviesPage";
 import NationalitiesPage from "./admin/NationalitiesPage";
 import RoomsPage from "./admin/RoomsPage";
+import SessionsPage from "./admin/SessionsPage";
 import TicketsPage from "./admin/TicketsPage";
 import UsersPage from "./admin/UsersPage";
 import Error404 from "./errors/Error404";
-import SessionsPage from "./admin/SessionsPage";
-import ThemeProvider from "@mui/material/styles/ThemeProvider";
-import CssBaseline from "@mui/material/CssBaseline";
-import themeConfigs from "../configs/theme.config";
-import AdminIndexPage from "./admin/AdminIndexPage";
 
 function AdminLayout() {
   const [sidebarMobileShow, setSidebarMobileShow] = useState(false);

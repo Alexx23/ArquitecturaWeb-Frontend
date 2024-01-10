@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
+import DatePicker from "react-datepicker";
 import SessionAPI, { Session, SessionCreate } from "../../api/SessionAPI";
 import DataTable from "../../components/admin/DataTable";
+import SessionCell from "../../components/admin/sessions/SessionCell";
+import SessionForm from "../../components/admin/sessions/SessionForm";
 import DeleteModal from "../../components/modals/DeleteModal";
 import UpdateModal from "../../components/modals/UpdateModal";
 import useSessions from "../../hooks/useSessions";
-import DatePicker from "react-datepicker";
 import { publish } from "../../utils/CustomEvents";
-import SessionCell from "../../components/admin/sessions/SessionCell";
-import SessionForm from "../../components/admin/sessions/SessionForm";
 
 function SessionsPage() {
   const [date, setDate] = useState<Date>(new Date());

@@ -1,12 +1,12 @@
 import {
-  ReactNode,
   createContext,
   createElement,
+  ReactNode,
   useContext,
   useEffect,
   useState,
 } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AuthAPI from "../api/AuthAPI";
 import UserAPI, { User } from "../api/UserAPI";
 import RoleEnum from "../utils/RoleEnum";
@@ -22,7 +22,6 @@ const UserContext = createContext<UserContextInterface>({
 });
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
-  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const { pathname } = useLocation();
 

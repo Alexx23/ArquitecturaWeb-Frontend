@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import MovieAPI, { Movie, MovieCreate } from "../../api/MovieAPI";
 import DataTable from "../../components/admin/DataTable";
-import DeleteModal from "../../components/modals/DeleteModal";
 import MovieActorForm from "../../components/admin/movies/MovieActorsForm";
 import MovieCell from "../../components/admin/movies/MovieCell";
 import MovieForm from "../../components/admin/movies/MovieForm";
+import DeleteModal from "../../components/modals/DeleteModal";
 import UpdateModal from "../../components/modals/UpdateModal";
 import useMovies from "../../hooks/useMovies";
 import { publish } from "../../utils/CustomEvents";
