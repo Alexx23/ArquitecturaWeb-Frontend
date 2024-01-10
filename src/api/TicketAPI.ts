@@ -13,6 +13,7 @@ export interface Ticket {
   user: User;
   depth: number;
   seat: number;
+  code: string;
   created_at: Date;
 }
 

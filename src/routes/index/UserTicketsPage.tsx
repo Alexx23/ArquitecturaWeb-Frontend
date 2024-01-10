@@ -16,6 +16,7 @@ import ApiErrorModal from "../../components/modals/ApiErrorModal";
 import DeleteModal from "../../components/modals/DeleteModal";
 import SuccessModal from "../../components/modals/SuccessModal";
 import UpdateModal from "../../components/modals/UpdateModal";
+import ViewTicketModal from "../../components/modals/ViewTicketModal";
 import { useUser } from "../../context/UserContext";
 import usePayments from "../../hooks/usePayments";
 import useTickets from "../../hooks/useTickets";
@@ -23,6 +24,8 @@ import { publish } from "../../utils/CustomEvents";
 import { formatCardExpirationDate } from "../../utils/DateUtils";
 
 export default function UserTicketsPage() {
+  const [selectedTicket, setSelectedTicket] = useState<Ticket | null>(null);
+
   const {
     tickets,
     nextPage: nextPageTickets,
@@ -72,6 +75,8 @@ export default function UserTicketsPage() {
               isLoading={isLoadingTickets}
               canEdit={false}
               canSearch={false}
+              customUpdateName={"Ver"}
+              customUpdateIcon={"qrcode"}
               renderCell={(ticket: Ticket) => (
                 <UserTicketCell ticket={ticket} />
               )}
@@ -81,6 +86,7 @@ export default function UserTicketsPage() {
               onDelete={() => {}}
               onCreate={() => {}}
               onUpdate={() => {}}
+              onCustomUpdate={(ticket: Ticket) => setSelectedTicket(ticket)}
             />
           </div>
         </div>
@@ -112,6 +118,11 @@ export default function UserTicketsPage() {
           </div>
         </div>
       </div>
+      <ViewTicketModal
+        show={selectedTicket != null}
+        onClose={() => setSelectedTicket(null)}
+        ticket={selectedTicket}
+      />
     </>
   );
 }
