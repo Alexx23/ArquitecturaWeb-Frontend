@@ -143,11 +143,11 @@ function CardForm({ onSubmit }: Props) {
                 required: "Año necesario",
                 min: {
                   value: 0,
-                  message: "Año debe ser mayor o igual a 0",
+                  message: "Año debe ser mayor o igual a 0 (Formato: AA)",
                 },
                 max: {
                   value: 99,
-                  message: "Año debe ser menor o igual a 99",
+                  message: "Año debe ser menor o igual a 99 (Formato: AA)",
                 },
               })}
             />
