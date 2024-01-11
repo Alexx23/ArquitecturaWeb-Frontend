@@ -24,7 +24,7 @@ function AdminIndexPage() {
     <>
       <DataTable
         data={payments}
-        title={"Panel de ventas"}
+        title={"Ventas"}
         columns={[
           "Usuario",
           "Fecha de Compra",

@@ -71,6 +71,17 @@ export default class MovieAPI {
     return getMethod<Paginated<Movie>>(url);
   }
 
+  public static async getFilteredMovies(
+    page: number,
+    filters: Map<string, number[]>
+  ): Promise<Paginated<Movie>> {
+    const queryString: string = Array.from(filters.entries())
+      .map(([key, values]) => `${key}=${values.join(",")}`)
+      .join("&");
+    let url = "/movie?page=" + page + "&" + queryString;
+    return getMethod<Paginated<Movie>>(url);
+  }
+
   public static async getAllMovies(): Promise<Movie[]> {
     return getMethod<Movie[]>("/movie/all");
   }

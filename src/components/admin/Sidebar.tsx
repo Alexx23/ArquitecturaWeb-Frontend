@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Divider from "@mui/material/Divider";
 import { Link, useLocation } from "react-router-dom";
 
 interface Props {
@@ -30,16 +31,11 @@ const AdminSidebar = ({ sidebarMobileShow }: Props) => {
                     to="/admin"
                     className="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700"
                   >
-                    <svg
+                    <FontAwesomeIcon
+                      icon="money-bills"
                       className="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                      <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                    </svg>
-                    <span className="ml-3">Panel</span>
+                    />
+                    <span className="ml-3">Ventas</span>
                   </Link>
                 </li>
                 <li>
@@ -206,6 +202,24 @@ const AdminSidebar = ({ sidebarMobileShow }: Props) => {
                       className="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                     />
                     <span className="ml-3">Sesiones</span>
+                  </Link>
+                </li>
+                <Divider />
+                <li>
+                  <Link
+                    to="/admin/reports"
+                    className={
+                      "flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700" +
+                      (isPathActive(["reports"])
+                        ? " bg-gray-100 dark:bg-gray-700"
+                        : "")
+                    }
+                  >
+                    <FontAwesomeIcon
+                      icon="chart-simple"
+                      className="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                    />
+                    <span className="ml-3">Informes</span>
                   </Link>
                 </li>
                 <li>

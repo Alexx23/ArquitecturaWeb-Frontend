@@ -13,6 +13,7 @@ import DistributorsPage from "./admin/DistributorsPage";
 import GenresPage from "./admin/GenresPage";
 import MoviesPage from "./admin/MoviesPage";
 import NationalitiesPage from "./admin/NationalitiesPage";
+import ReportsPage from "./admin/ReportsPage";
 import RoomsPage from "./admin/RoomsPage";
 import SessionsPage from "./admin/SessionsPage";
 import TicketsPage from "./admin/TicketsPage";
@@ -72,6 +73,7 @@ function AdminLayout() {
                 <Route path="/nationalities" element={<NationalitiesPage />} />
                 <Route path="/rooms" element={<RoomsPage />} />
                 <Route path="/sessions" element={<SessionsPage />} />
+                <Route path="/reports" element={<ReportsPage />} />
                 <Route path="/tickets" element={<TicketsPage />} />
                 <Route path="/users" element={<UsersPage />} />
                 <Route path="*" element={<Error404 goTo="/admin" />} />
