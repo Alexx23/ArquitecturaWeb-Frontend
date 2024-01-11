@@ -67,13 +67,13 @@ const ViewTicketModal = ({ show, onClose, ticket }: Props) => {
                       <p className="text-lg text-gray-600 text-center">
                         {"Fila: "}
                         <span className="font-semibold text-gray-900">
-                          {ticket.depth}
+                          {Number(1 + ticket.depth)}
                         </span>
                       </p>
                       <p className="text-lg text-gray-600 text-center">
                         {"Asiento: "}
                         <span className="font-semibold text-gray-900">
-                          {ticket.seat}
+                          {Number(1 + ticket.seat)}
                         </span>
                       </p>
                     </div>
