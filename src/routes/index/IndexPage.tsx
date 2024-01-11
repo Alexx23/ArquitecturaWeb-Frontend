@@ -91,7 +91,7 @@ function IndexPage({ darkMode }: Props) {
                   data-aos="zoom-y-out"
                   data-aos-delay="450"
                 >
-                  <div className="mx-4 relative inline-flex group">
+                  <div className="mb-4 sm:mb-0 mx-4 relative inline-flex group">
                     <div className="absolute transitiona-all duration-1000 opacity-70 -inset-px bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg group-hover:opacity-100 group-hover:-inset-1 group-hover:duration-200 animate-tilt"></div>
                     <Link
                       to="/movies"
