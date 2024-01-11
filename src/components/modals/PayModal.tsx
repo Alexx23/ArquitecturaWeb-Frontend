@@ -103,6 +103,14 @@ function PayModal({ show, onClose, onOpen, buyObject, prices }: Props) {
                       <div className="mt-2">
                         <p className="text-lg text-gray-700 text-center mb-10 dark:text-gray-300">
                           Por favor, confirme la compra
+                          <br />
+                          {buyObject != null && (
+                            <>
+                              {Number(
+                                prices[0].amount * buyObject.seats.length
+                              ).toFixed(2) + "€"}
+                            </>
+                          )}
                         </p>
                       </div>
                       <div className="items-center mt-4 text-center">
