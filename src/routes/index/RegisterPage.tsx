@@ -245,7 +245,7 @@ function RegisterPage() {
             <div className="text-sm font-medium text-gray-500 dark:text-gray-400">
               ¿Ya tienes una cuenta?{" "}
               <Link
-                to="/login"
+                to={"/login" + (redirectUrl ? "?redirect=" + redirectUrl : "")}
                 className="text-primary-700 hover:underline dark:text-primary-500"
               >
                 Inicia sesión
