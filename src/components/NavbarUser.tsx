@@ -80,7 +80,7 @@ export default function NavbarUser() {
             Inicio
           </MenuItem>
           {user.role.id == RoleEnum.ADMIN && (
-            <MenuItem onClick={() => navigate("/admin")}>
+            <MenuItem onClick={() => (window.location.href = "/admin")}>
               <ListItemIcon>
                 <FontAwesomeIcon icon={"gear"} className="w-4 h-4" />
               </ListItemIcon>
