@@ -163,6 +163,21 @@ function ReportsPage() {
   const searchRender = () => {
     return (
       <div className="w-[800px]">
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setSelectedGenres([]);
+            setSelectedDirectors([]);
+            setSelectedDistributors([]);
+            setSelectedNationalities([]);
+            setSelectedAgeClassifications([]);
+            setSelectedRooms([]);
+            setSelectedActors([]);
+          }}
+          className="mb-1 py-1 inline-flex items-center justify-center w-1/2 px-3 text-sm font-medium text-center text-white rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 sm:w-auto dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+        >
+          Eliminar filtros
+        </button>
         <ReportSelectElement
           elementName={"Actor"}
           elementPluralName={"Actores"}
