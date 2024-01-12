@@ -25,7 +25,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const { pathname } = useLocation();
 
-  const loggedUserPaths = ["profile", "tickets"];
+  const loggedUserPaths = ["profile", "tickets", "favorites"];
 
   const logout = () => {
     AuthAPI.logout()

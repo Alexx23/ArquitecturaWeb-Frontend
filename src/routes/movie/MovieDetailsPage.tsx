@@ -126,7 +126,10 @@ const MovieDetailsPage = () => {
   }, [searchParams, user]);
 
   useEffect(() => {
-    if (!user) return;
+    if (!user) {
+      setIsFavorite(false);
+      return;
+    }
     FavoriteAPI.isFavorite(Number(movieId))
       .then((res) => {
         setIsFavorite(res);
