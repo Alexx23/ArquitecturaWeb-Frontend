@@ -249,7 +249,10 @@ function SessionRoomModal({
                                         "Fila: " +
                                         Number(1 + depth) +
                                         ", \nButaca: " +
-                                        Number(1 + seat)
+                                        Number(1 + seat) +
+                                        (isOccupied(depth, seat)
+                                          ? ".\nOCUPADA"
+                                          : "")
                                       }
                                       arrow
                                       placement="top"
@@ -262,7 +265,12 @@ function SessionRoomModal({
                                           }
                                           type="checkbox"
                                           value={depth + ":" + seat}
-                                          className="mx-0.5 xl:mx-1 my-1.5 w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                                          className={
+                                            "mx-0.5 xl:mx-1 my-1.5 w-4 h-4 text-blue-600 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2" +
+                                            (isOccupied(depth, seat)
+                                              ? " bg-red-300 border-red-500 dark:bg-red-700 dark:border-red-600"
+                                              : " bg-green-300 border-green-500 dark:bg-green-700 dark:border-green-600")
+                                          }
                                         />
                                         {isOccupied(depth, seat) && (
                                           <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
