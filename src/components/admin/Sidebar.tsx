@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Divider from "@mui/material/Divider";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 interface Props {
@@ -12,6 +13,25 @@ const AdminSidebar = ({ sidebarMobileShow }: Props) => {
   const isPathActive = (path: string[]) => {
     return path.some((p) => pathname.toLocaleLowerCase().includes(p));
   };
+
+  const [viewDropdownMovies, setViewDropdownMovies] = useState(false);
+
+  useEffect(() => {
+    if (
+      isPathActive([
+        "movies",
+        "genres",
+        "actors",
+        "directors",
+        "distributors",
+        "nationalities",
+      ])
+    ) {
+      setViewDropdownMovies(true);
+    } else {
+      setViewDropdownMovies(false);
+    }
+  }, [pathname]);
 
   return (
     <>
@@ -41,9 +61,8 @@ const AdminSidebar = ({ sidebarMobileShow }: Props) => {
                 <li>
                   <button
                     type="button"
+                    onClick={() => setViewDropdownMovies(!viewDropdownMovies)}
                     className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
-                    aria-controls="dropdown-movies"
-                    data-collapse-toggle="dropdown-movies"
                   >
                     <FontAwesomeIcon
                       icon="film"
@@ -66,19 +85,8 @@ const AdminSidebar = ({ sidebarMobileShow }: Props) => {
                     </svg>
                   </button>
                   <ul
-                    id="dropdown-movies"
                     className={
-                      "space-y-2 py-2" +
-                      (isPathActive([
-                        "movies",
-                        "genres",
-                        "actors",
-                        "directors",
-                        "distributors",
-                        "nationalities",
-                      ])
-                        ? ""
-                        : " hidden")
+                      "space-y-2 py-2" + (viewDropdownMovies ? "" : " hidden")
                     }
                   >
                     <li>
