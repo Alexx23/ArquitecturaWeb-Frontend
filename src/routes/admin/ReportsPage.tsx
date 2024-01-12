@@ -224,7 +224,6 @@ function ReportsPage() {
         columns={[
           "Nombre",
           "Año y duración (minutos)",
-          "Tickets",
           "Sinopsis",
           "Web",
           "Género",

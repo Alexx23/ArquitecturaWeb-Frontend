@@ -5,7 +5,6 @@ import { Director } from "./DirectorAPI";
 import { Distributor } from "./DistributorAPI";
 import { Genre } from "./GenreAPI";
 import { Nationality } from "./NationalityAPI";
-import { Ticket } from "./TicketAPI";
 
 export interface Movie {
   id: number;
@@ -14,7 +13,6 @@ export interface Movie {
   original_title: string;
   duration: number;
   year: number;
-  ticket_list: Ticket[];
   actor_list: Actor[];
   synopsis: string;
   age_classification: AgeClassification;
