@@ -1,4 +1,5 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
+import { faHeart } from "@fortawesome/free-regular-svg-icons/faHeart";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons/faAngleLeft";
 import { faCalendarWeek } from "@fortawesome/free-solid-svg-icons/faCalendarWeek";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons/faCartShopping";
@@ -8,8 +9,10 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons/faCircleInfo";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons/faCreditCard";
 import { faEye } from "@fortawesome/free-solid-svg-icons/faEye";
 import { faEyeSlash } from "@fortawesome/free-solid-svg-icons/faEyeSlash";
+import { faFilm } from "@fortawesome/free-solid-svg-icons/faFilm";
 import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons/faFloppyDisk";
 import { faGear } from "@fortawesome/free-solid-svg-icons/faGear";
+import { faHeart as faSolidHeart } from "@fortawesome/free-solid-svg-icons/faHeart";
 import { faHouse } from "@fortawesome/free-solid-svg-icons/faHouse";
 import { faLock } from "@fortawesome/free-solid-svg-icons/faLock";
 import { faMoneyBills } from "@fortawesome/free-solid-svg-icons/faMoneyBills";
@@ -63,7 +66,10 @@ library.add(
   faCircleInfo,
   faQrcode,
   faMoneyBills,
-  faChartSimple
+  faChartSimple,
+  faSolidHeart,
+  faHeart,
+  faFilm
 );
 
 const root = ReactDOM.createRoot(

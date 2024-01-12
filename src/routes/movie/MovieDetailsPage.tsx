@@ -3,10 +3,12 @@ import { Box, Divider, Stack, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
   Link,
+  useLocation,
   useNavigate,
   useParams,
   useSearchParams,
 } from "react-router-dom";
+import FavoriteAPI from "../../api/FavoriteAPI";
 import MovieAPI, { Movie } from "../../api/MovieAPI";
 import { BuyObject } from "../../api/PaymentAPI";
 import PriceAPI, { Price } from "../../api/PriceAPI";
@@ -14,6 +16,7 @@ import CastSlide from "../../components/client/CastSlide";
 import Container from "../../components/client/Container";
 import ImageHeader from "../../components/client/ImageHeader";
 import MovieComment from "../../components/client/MovieComment";
+import AccountNeededModal from "../../components/modals/AccountNeededModal";
 import PayModal from "../../components/modals/PayModal";
 import SessionsModal from "../../components/modals/SessionsModal";
 import uiConfigs from "../../configs/ui.configs";
@@ -25,6 +28,7 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
 
   const [searchParams] = useSearchParams();
+  const { pathname } = useLocation();
 
   const [movie, setMovie] = useState<Movie | null>();
   const [isLoading, setIsLoading] = useState(true);
@@ -32,6 +36,12 @@ const MovieDetailsPage = () => {
   const [showPayModal, setShowPayModal] = useState(false);
   const [buyObject, setBuyObject] = useState<BuyObject | null>(null);
   const [prices, setPrices] = useState<Price[]>([]);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [cartAnimated, setCartAnimated] = useState(true);
+  const [likeAnimated, setLikeAnimated] = useState(false);
+  const [favoriteChanged, setFavoriteChanged] = useState(false);
+  const [showAccountNeededModalLike, setShowAccountNeededModalLike] =
+    useState(false);
 
   const navigate = useNavigate();
   const { user } = useUser();
@@ -52,6 +62,33 @@ const MovieDetailsPage = () => {
 
       default:
         return "";
+    }
+  };
+
+  const handleFavoriteClick = () => {
+    if (!user) {
+      setShowAccountNeededModalLike(true);
+      return;
+    }
+
+    if (isFavorite) {
+      FavoriteAPI.deleteFavorite(Number(movieId))
+        .then(() => {
+          setIsFavorite(false);
+          setFavoriteChanged(true);
+        })
+        .catch((err) => {
+          publish("showApiErrorMessage", err);
+        });
+    } else {
+      FavoriteAPI.createFavorite(Number(movieId))
+        .then(() => {
+          setIsFavorite(true);
+          setFavoriteChanged(true);
+        })
+        .catch((err) => {
+          publish("showApiErrorMessage", err);
+        });
     }
   };
 
@@ -89,6 +126,17 @@ const MovieDetailsPage = () => {
   }, [searchParams, user]);
 
   useEffect(() => {
+    if (!user) return;
+    FavoriteAPI.isFavorite(Number(movieId))
+      .then((res) => {
+        setIsFavorite(res);
+      })
+      .catch(() => {
+        /* No hacer nada */
+      });
+  }, [movieId, user]);
+
+  useEffect(() => {
     PriceAPI.getPrices()
       .then((res) => {
         setPrices(res);
@@ -100,6 +148,20 @@ const MovieDetailsPage = () => {
         );
       });
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setCartAnimated(false);
+    }, 3000);
+  }, []);
+
+  useEffect(() => {
+    if (!favoriteChanged) return;
+    setLikeAnimated(true);
+    setTimeout(() => {
+      setLikeAnimated(false);
+    }, 1000);
+  }, [isFavorite, favoriteChanged]);
 
   return !movie ? (
     <></>
@@ -168,13 +230,30 @@ const MovieDetailsPage = () => {
                 >
                   {movie.original_title}
                 </span>
-                <button
-                  onClick={() => setShowSessionsModal(true)}
-                  className="max-w-[15rem] z-[5] text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-3 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                >
-                  <FontAwesomeIcon icon="cart-shopping" className="mr-2" />
-                  COMPRAR ENTRADAS
-                </button>
+                <div className="flex">
+                  <button
+                    onClick={() => setShowSessionsModal(true)}
+                    className="max-w-[15rem] z-[5] text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-semibold rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center mr-3 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  >
+                    <FontAwesomeIcon
+                      bounce={cartAnimated}
+                      icon="cart-shopping"
+                      className="mr-2"
+                    />
+                    COMPRAR ENTRADAS
+                  </button>
+                  <button
+                    onClick={handleFavoriteClick}
+                    type="button"
+                    className="text-red-600 hover:bg-gray-300 rounded-full text-sm p-2.5 text-center inline-flex items-center dark:text-red-500 dark:hover:bg-gray-500"
+                  >
+                    <FontAwesomeIcon
+                      bounce={likeAnimated}
+                      icon={isFavorite ? ["fas", "heart"] : ["far", "heart"]}
+                      className="w-8 h-8"
+                    />
+                  </button>
+                </div>
                 <Stack direction="row" spacing={1} alignItems="center">
                   <span className="text-base text-gray-900 dark:text-gray-100">
                     Género:
@@ -255,6 +334,14 @@ const MovieDetailsPage = () => {
         onOpen={() => setShowPayModal(true)}
         buyObject={buyObject}
         prices={prices}
+      />
+      <AccountNeededModal
+        show={showAccountNeededModalLike}
+        onClose={() => setShowAccountNeededModalLike(false)}
+        content={
+          "¡Crea una cuenta! Necesitas tener una cuenta para añadir esta película a tu lista de favoritos. Al iniciar sesión o al registrarte, te redireccionaremos a esta película para que la añadas."
+        }
+        redirectUrl={pathname}
       />
     </>
   );

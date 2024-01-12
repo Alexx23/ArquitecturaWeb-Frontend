@@ -13,6 +13,7 @@ import LoginPage from "./index/LoginPage";
 import PrivacyPolicyPage from "./index/PrivacyPolicyPage";
 import RegisterPage from "./index/RegisterPage";
 import TermsConditionsPage from "./index/TermsConditionsPage";
+import UserFavoritesPage from "./index/UserFavoritesPage";
 import UserProfilePage from "./index/UserProfilePage";
 import UserTicketsPage from "./index/UserTicketsPage";
 import MoviesLayout from "./MoviesLayout";
@@ -118,6 +119,17 @@ function IndexLayout() {
                         allowedRoles={[RoleEnum.CLIENT, RoleEnum.ADMIN]}
                       />
                       <UserTicketsPage />
+                    </>
+                  }
+                />
+                <Route
+                  path="/favorites"
+                  element={
+                    <>
+                      <RequireAuth
+                        allowedRoles={[RoleEnum.CLIENT, RoleEnum.ADMIN]}
+                      />
+                      <UserFavoritesPage />
                     </>
                   }
                 />
